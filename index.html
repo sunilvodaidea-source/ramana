@@ -185,7 +185,26 @@ function removeSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;if
 function askPassword(){if(isEditing()){return;}let p=prompt("Password:");if(!p)return;if(p==="abcde123"){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();document.getElementById('delContactBtn').style.display='inline-block';showAddBtns();let sb=document.querySelector('.full-save');if(sb)sb.style.display='block';startPassTimer();}}
 function exitEdit(){stopPassTimer();forceNormalView();saveAll();if(currentSheet==='samparka'){let sb=document.querySelector('.full-save');if(sb)sb.style.display='none';}}
 function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
-function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
+  function saveAll(){
+  let was=isEditing();
+  savePosts();
+  forceNormalView();
+  try{
+    localStorage.setItem('one-sheet-save',document.body.innerHTML);
+    localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);
+    
+    // ಫೈರ್‌ಬೇಸ್‌ಗೆ ಡೇಟಾ ಕಳುಹಿಸಲು ಈ ಸಾಲನ್ನು ಇಲ್ಲಿ ಸೇರಿಸಿ:
+    if(typeof saveToFirestore==='function'){saveToFirestore(document.body.innerHTML);}
+    
+  }catch(err){}
+  
+  if(was){
+    document.body.classList.add('editing');
+    document.getElementById('edit-bar').style.display='block';
+    document.getElementById('float-save').style.display='block';
+    enableTotalEdit();
+  }
+}
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();initCornerDrag();
   <script type="module">
