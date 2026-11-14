@@ -188,15 +188,77 @@ function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{l
 function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();initCornerDrag();
+  <script type="module">
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+  // Your web app's Firebase configuration
   const firebaseConfig = {
-  apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
-  authDomain: "ramana-website.firebaseapp.com",
-  projectId: "ramana-website",
-  storageBucket: "ramana-website.firebasestorage.app",
-  messagingSenderId: "1070413104086",
-  appId: "1:1070413104086:web:f85473281477903bcd9a77"
-};
+    apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
+    authDomain: "ramana-website.firebaseapp.com",
+    projectId: "ramana-website",
+    storageBucket: "ramana-website.firebasestorage.app",
+    messagingSenderId: "1070413104086",
+    appId: "1:1070413104086:web:f85473281477903bcd9a77"
+  };
+
+  // Initialize Firebase
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
+    authDomain: "ramana-website.firebaseapp.com",
+    projectId: "ramana-website",
+    storageBucket: "ramana-website.firebasestorage.app",
+    messagingSenderId: "1070413104086",
+    appId: "1:1070413104086:web:f85473281477903bcd9a77"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
+    authDomain: "ramana-website.firebaseapp.com",
+    projectId: "ramana-website",
+    storageBucket: "ramana-website.firebasestorage.app",
+    messagingSenderId: "1070413104086",
+    appId: "1:1070413104086:web:f85473281477903bcd9a77"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 1. ಫೈರ್‌ಬೇಸ್‌ನಲ್ಲಿ ಡೇಟಾ ಸೇವ್ ಮಾಡಲು (Save Function)
+  window.saveToFirestore = async function(htmlContent) {
+    try {
+      await setDoc(doc(db, "pages", "home"), {
+        content: htmlContent,
+        updatedAt: new Date()
+      });
+      console.log("ಫೈರ್‌ಬೇಸ್‌ನಲ್ಲಿ ಡೇಟಾ ಸೇವ್ ಆಗಿದೆ!");
+    } catch (error) {
+      console.error("ದೋಷ:", error);
+    }
+  };
+
+  // 2. ಫೈರ್‌ಬೇಸ್‌ನಿಂದ ಡೇಟಾ ಲೋಡ್ ಮಾಡಲು (Load Function)
+  window.loadFromFirestore = async function() {
+    try {
+      const docSnap = await getDoc(doc(db, "pages", "home"));
+      if (docSnap.exists()) {
+        return docSnap.data().content;
+      }
+    } catch (error) {
+      console.error("ದೋಷ:", error);
+    }
+    return null;
+  };
 </script>
-</body>
-</html>
 
