@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-site-verification" content="yyIKd59kITd3yHmmJ5S6bdqDrA24Ea8nC08BbCEQ0" />
 <title>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#0A2A5E;color:#fff;font-family:Arial;text-align:center;overflow-x:hidden}
@@ -26,6 +25,7 @@ footer{padding:14px;font-size:15px}
 #full-page.open{display:flex}
 .full-top{background:#0A2A5E;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #C9A227;position:sticky;top:0;gap:8px}
 .full-top b{color:#FFD700;font-size:19px}.back-btn{background:#E8D9A8;color:#000;border:none;padding:9px 18px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px}
+.edit-inside-btn{background:#FFD700;color:#000;border:none;padding:9px 16px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px}
 .full-title{text-align:center;padding:25px 20px 5px}.full-title h1{font-size:32px;margin:0;outline:none}.full-title p{color:#F5D67A;font-size:16px}
 .sheet-photo-wrap{margin:18px 20px 0;border:1px solid #C9A227;border-radius:8px;background:#000;overflow:hidden}
 .sheet-photo-wrap img{width:100%;height:auto;max-height:420px;object-fit:contain;display:none;background:#000;cursor:pointer}
@@ -37,10 +37,14 @@ footer{padding:14px;font-size:15px}
 .full-edit *{color:#fff!important;background:transparent!important}
 .full-edit:empty:before{content:"ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ ಬರೆಯಿರಿ...";color:#9AB0D6}
 .full-save{text-align:center;padding:0 0 25px}.save-btn{background:gold;color:#000;padding:12px 30px;border:none;border-radius:20px;font-weight:bold;font-size:17px;cursor:pointer}
-#float-save{position:fixed;bottom:20px;right:20px;background:gold;color:#000;padding:14px 22px;border:none;border-radius:30px;font-weight:bold;font-size:17px;cursor:pointer;z-index:310}
+#edit-bar{display:none;background:gold;color:#000;padding:10px;position:fixed;top:0;left:0;right:0;z-index:300;font-weight:bold;text-align:center}
+#edit-indicator{display:none;background:#ff4444;color:#fff;font-size:12px;padding:4px 10px;border-radius:12px;margin-left:8px}
+#float-save{display:none;position:fixed;bottom:20px;right:20px;background:gold;color:#000;padding:14px 22px;border:none;border-radius:30px;font-weight:bold;font-size:17px;cursor:pointer;z-index:310}
+#idle-info{font-size:13px;font-weight:normal}
 [data-edit]{outline:none!important}
 .editing [data-edit]{outline:1px dotted rgba(255,215,0,.35)!important}
 .editing [data-edit]:hover,.editing [data-edit]:focus{outline:1px dashed gold!important;cursor:text;background:rgba(255,215,0,.12)}
+.editing button,.editing a{cursor:text}
 .contact-box{margin:0;border:none;border-radius:0;background:transparent;padding:0;text-align:center;max-width:none;width:100%}
 .contact-box h3{color:#F5D67A;margin:0;padding:14px 10px;font-size:19px;border-top:1px solid #C9A227;border-bottom:1px solid #C9A227}
 .wa-btn{display:block;background:#25D366;color:#fff!important;text-decoration:none;padding:16px;border-radius:0;font-weight:bold;font-size:21px;margin:0;text-align:center;white-space:normal;line-height:1.4}
@@ -50,8 +54,11 @@ footer{padding:14px;font-size:15px}
 .mail-box a{color:#FFD700;font-weight:bold;word-break:break-all}
 .gmail-btn{display:inline-block;background:#FFD700;color:#000!important;text-decoration:none;padding:13px 28px;border-radius:25px;font-weight:bold;font-size:18px;margin-top:12px;white-space:normal;line-height:1.4}
 .site-pill{display:inline-block;background:transparent;color:#fff!important;text-decoration:none;border:1.5px solid #fff;padding:10px 22px;border-radius:25px;font-size:16px;margin-top:14px}
-.edit-link-input{display:block!important;width:100%;background:#fff;color:#000;border:none;padding:10px;border-radius:8px;margin:6px 0;font-size:14px}
-.edit-link-label{display:block!important;font-size:13px;color:#F5D67A;text-align:left;margin:8px 0 2px}
+.edit-link-input{display:none!important;width:100%;background:#fff;color:#000;border:none;padding:10px;border-radius:8px;margin:6px 0;font-size:14px}
+.edit-link-label{display:none!important;font-size:13px;color:#F5D67A;text-align:left;margin:8px 0 2px}
+body.editing .edit-link-input{display:block!important}
+body.editing .edit-link-label{display:block!important}
+body.editing #edit-indicator{display:inline-block!important}
 #posts-area{display:none;margin:10px 20px 20px;text-align:left}
 .post-box{border:1px solid #C9A227;border-radius:10px;overflow:hidden;margin:0 0 20px;background:#0A2A5E}
 .post-box img.post-img{width:100%;max-height:420px;object-fit:contain;display:none;background:#000}
@@ -60,20 +67,23 @@ footer{padding:14px;font-size:15px}
 .post-box .post-text *{color:#fff!important;background:transparent!important}
 .post-box .post-text:empty:before{content:"ಇಲ್ಲಿ ಬರೆಯಿರಿ...";color:#9AB0D6}
 .post-date{padding:0 18px 16px;color:#F5D67A;font-size:14px;text-align:right}
-.add-post-btn{display:none}
-.add-post-btn-bottom{display:block!important;width:calc(100% - 40px);margin:10px 20px 10px;background:#FFD700;color:#000;border:none;padding:14px;border-radius:20px;font-weight:900;font-size:30px;line-height:1;cursor:pointer;box-shadow:0 0 0 3px #FFD700, 0 0 18px rgba(255,215,0,.9)}
-.del-post-btn{background:#ff4444;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer}
+.add-post-btn{display:none;width:calc(100% - 40px);margin:0 20px 15px;background:#FFD700;color:#000;border:none;padding:13px;border-radius:20px;font-weight:bold;font-size:16px;cursor:pointer}
+.add-post-btn-bottom{display:none;width:calc(100% - 40px);margin:10px 20px 10px;background:#FFD700;color:#000;border:none;padding:15px;border-radius:20px;font-weight:bold;font-size:17px;cursor:pointer}
+.del-post-btn{background:#ff4444;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
+body.editing .del-post-btn{display:inline-block}
 @media(max-width:600px){.hero h1{font-size:36px}header{flex-direction:column;gap:8px}.editor h2{font-size:19px}.full-title h1{font-size:26px}.corner-photo-wrap{top:98px;right:8px;width:110px;height:140px}}
 </style>
 </head>
-<body class="editing">
+<body>
 <header><b><span data-edit onclick="goHome()">✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span></b><nav>
 <button class="nav-btn" type="button" onclick="navGo('home')"><span data-edit>ಮುಖಪುಟ</span></button>
 <button class="nav-btn" type="button" onclick="navGo('nimma')"><span data-edit>ನಿಮ್ಮ ಬರಹ</span></button>
 <button class="nav-btn" type="button" onclick="navGo('samparka')"><span data-edit>ಸಂಪರ್ಕ</span></button>
+<button class="nav-btn" type="button" onclick="askPassword()"><span data-edit>🔑</span></button>
 </nav></header>
 <div class="corner-photo-wrap" id="cornerWrap"><img id="cornerPhoto" src="" alt=""><div id="cornerPhotoEmpty" class="corner-photo-empty"><span data-edit></span></div><div class="corner-hint"><span data-edit></span></div><div class="corner-drag" id="cornerDrag"></div></div>
 <input type="file" id="cornerFileInput" accept="image/*" style="display:none">
+<div id="edit-bar"><span data-edit>✏️ ಎಡಿಟ್ - ಪ್ರತಿ ಅಕ್ಷರ ತಿದ್ದಬಹುದು</span> <span id="idle-info"><span data-edit>15:00</span></span> <button onclick="saveAll()" style="background:#0A2A5E;color:#fff;padding:8px 20px;border:none;border-radius:15px;font-weight:bold;cursor:pointer"><span data-edit>save</span></button> <button onclick="copyFullCode()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>📋 Copy Code</span></button> <button onclick="exitEdit()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>ಮುಗಿಸು</span></button></div>
 <div id="home"><div class="hero"><div class="star"><span data-edit>✦</span></div><h1><span data-edit>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span></h1><p><span data-edit>ಅರುಣಾಚಲ ಶಿವ</span></p></div></div>
 <div class="editor"><p class="pill"><span data-edit>ಸಂಪಾದಕರು</span></p><h2><span data-edit>ವೆಬ್ ಪೇಜ್ ಸಂಪಾದಕರು : ಚಿನ್ವತ ( ಸುನಿಲ್ )</span></h2><p><span data-edit>Mail ID: sunilvodaidea@gmail.com</span></p></div>
 <footer><span data-edit>© 2026 ಚಿನ್ವತ ಶ್ರೀ ರಮಣ ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</span></footer>
@@ -81,8 +91,9 @@ footer{padding:14px;font-size:15px}
 <input type="file" id="sheetFileInput" accept="image/*" style="display:none">
 <input type="file" id="postFileInput" accept="image/*" style="display:none">
 <div id="full-page">
-<div class="full-top"><b><span data-edit>✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span></b><div><button class="back-btn" type="button" onclick="goBack()"><span data-edit>← ಹಿಂದೆ</span></button></div></div>
+<div class="full-top"><b><span data-edit>✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span><span id="edit-indicator"><span data-edit>✏️ EDIT ON</span></span></b><div><button class="edit-inside-btn" type="button" onclick="askPassword()"><span data-edit>✏️ ತಿದ್ದು</span></button> <button class="back-btn" type="button" onclick="goBack()"><span data-edit>← ಹಿಂದೆ</span></button></div></div>
 <div class="full-title"><h1 id="sheet-title"><span data-edit>ನಿಮ್ಮ ಪೋಸ್ಟ್</span></h1><p><span data-edit>✦</span></p></div>
+<button id="addPostBtn" class="add-post-btn" type="button" onclick="addPost()">+ ಹೊಸ ಪೋಸ್ಟ್ ಸೇರಿಸಿ</button>
 <div id="posts-area"></div>
 <div id="photoWrap" class="sheet-photo-wrap"><img id="sheet-photo" src="" alt="" onclick="pickSheetPhoto()"><div id="sheet-photo-empty" class="sheet-photo-empty"><span data-edit></span></div><div class="sheet-photo-btns"><button class="sheet-photo-btn" type="button" onclick="pickSheetPhoto()"><span data-edit>Upload Photo</span></button></div></div>
 <button id="typeBtn" class="type-hint-btn" type="button" onclick="focusTyping()"><span data-edit>ನಿಮ್ಮ ಬರಹ/ಪೋಸ್ಟ್</span></button>
@@ -90,14 +101,14 @@ footer{padding:14px;font-size:15px}
 <div id="contact-block" style="display:none">
 <div class="contact-box" id="contactBox">
 <h3><span data-edit>📞 ಸಂಪರ್ಕಿಸಿ</span></h3>
-<a class="wa-btn" id="waLink" href="https://whatsapp.com/channel/0029Vb9rGruAu3aXQXS8kG1m" target="_blank"><span data-edit>WhatsApp</span></a>
+<a class="wa-btn" id="waLink" href="https://whatsapp.com/channel/0029Vb9rGruAu3aXQXS8kG1m" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>WhatsApp</span></a>
 <div class="edit-link-label"><span data-edit>WhatsApp Link - ಇಲ್ಲಿ Link ಬದಲಾಯಿಸಿ</span></div>
 <input class="edit-link-input" id="waInput" value="https://whatsapp.com/channel/0029Vb9rGruAu3aXQXS8kG1m" oninput="document.getElementById('waLink').href=this.value">
 <p class="contact-sub"><span data-edit>🌐 ನಮ್ಮ ಇತರೆ ವೆಬ್ ಪೇಜ್ ಗಳು</span></p>
-<a class="web-link" id="webLink1" href="https://robert-adams.vercel.app/" target="_blank"><span data-edit>🔗 Robert Adams - Web Page 1 →</span></a>
+<a class="web-link" id="webLink1" href="https://robert-adams.vercel.app/" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>🔗 Robert Adams - Web Page 1 →</span></a>
 <div class="edit-link-label"><span data-edit>Web Page 1 Link - ಇಲ್ಲಿ Link ಬದಲಾಯಿಸಿ</span></div>
 <input class="edit-link-input" value="https://robert-adams.vercel.app/" oninput="document.getElementById('webLink1').href=this.value">
-<a class="web-link" id="webLink2" href="https://elaborate-paletas-cf9e68.netlify.app/" target="_blank"><span data-edit>🔗 Web Page 2 →</span></a>
+<a class="web-link" id="webLink2" href="https://elaborate-paletas-cf9e68.netlify.app/" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>🔗 Web Page 2 →</span></a>
 <div class="edit-link-label"><span data-edit>Web Page 2 Link - ಇಲ್ಲಿ Link ಬದಲಾಯಿಸಿ</span></div>
 <input class="edit-link-input" value="https://elaborate-paletas-cf9e68.netlify.app/" oninput="document.getElementById('webLink2').href=this.value">
 <div class="mail-box">
@@ -105,36 +116,54 @@ footer{padding:14px;font-size:15px}
 <div style="margin-top:10px"><span data-edit>Mail ID:</span> <span data-edit id="mailText">ashram@gururamana.org</span></div>
 <div class="edit-link-label"><span data-edit>Mail ID - ಇಲ್ಲಿ Mail ಬದಲಾಯಿಸಿ</span></div>
 <input class="edit-link-input" id="mailInput" value="ashram@gururamana.org" oninput="document.getElementById('mailText').innerText=this.value;updateGmail()">
-<a class="gmail-btn" id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=ashram@gururamana.org&su=Guest%20House%20Booking%20-%20Ramana%20Ashram" target="_blank"><span data-edit>📧 Google Gmail</span></a><br>
-<a class="site-pill" id="siteLink" href="https://www.gururamana.org" target="_blank"><span data-edit>https://www.gururamana.org</span></a><br>
+<a class="gmail-btn" id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=ashram@gururamana.org&su=Guest%20House%20Booking%20-%20Ramana%20Ashram" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>📧 Google Gmail</span></a><br>
+<a class="site-pill" id="siteLink" href="https://www.gururamana.org" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>https://www.gururamana.org</span></a><br>
 </div>
+<button onclick="deleteContact()" type="button" style="background:#ff4444;color:#fff;border:none;padding:10px 18px;border-radius:20px;margin-top:14px;cursor:pointer;display:none" id="delContactBtn"><span data-edit>🗑️ ಈ ಸಂಪರ್ಕ ಬಾಕ್ಸ್ ತೆಗೆಯಿರಿ</span></button>
 </div></div>
 <div class="full-save">
-<button id="addPostBtnBottom" class="add-post-btn-bottom" type="button" onclick="addPost()">+</button>
+<button id="addPostBtnBottom" class="add-post-btn-bottom" type="button" onclick="addPost()">+ ಮುಂದಿನ ಪೋಸ್ಟ್ ಸೇರಿಸಿ ↓ Add Page</button>
 <br><button class="save-btn" type="button" onclick="saveSheet()"><span data-edit>save</span></button><p id="sheet-msg" style="color:#90FF90"><span data-edit></span></p></div>
 </div>
 <script>
-let currentSheet='';let titles={'nimma':'ನಿಮ್ಮ ಪೋಸ್ಟ್','samparka':'ಸಂಪರ್ಕ'};
+let currentSheet='';let titles={'nimma':'ನಿಮ್ಮ ಪೋಸ್ಟ್','samparka':'ಸಂಪರ್ಕ','bodhane':'ನಿಮ್ಮ ಬರಹ / ಪೋಸ್ಟ್ / ಫೋಟೋಸ್','jeevana':'ಜೀವನಚರಿತ್ರೆ','grantha':'ನೀವು ಓದಿದ ಪುಸ್ತಕ / ಗ್ರಂಥಗಳು','chitra':'ಚಿತ್ರಗಳು','video':'ವೀಡಿಯೋ ವೀಕ್ಷಿಸಿ'};
+let passStart=0;let passTimer=null;let passCount=null;let PASS_LIMIT=900;
 let currentPostIdx=-1;
-function isEditing(){return true;}
+function isEditing(){return document.body.classList.contains('editing');}
 function isOpenSheet(key){if(!key)key=currentSheet;return key!=='samparka' && key!=='home';}
+function fmt(s){let m=Math.floor(s/60);let sec=s%60;return m+":"+(sec<10?"0"+sec:sec);}
 function fmtDateTime(d){let dd=new Date(d);let day=String(dd.getDate()).padStart(2,'0');let mo=String(dd.getMonth()+1).padStart(2,'0');let y=dd.getFullYear();let h=dd.getHours();let ap=h>=12?'PM':'AM';let hh=h%12||12;let mm=String(dd.getMinutes()).padStart(2,'0');return day+'-'+mo+'-'+y+', '+hh+':'+mm+' '+ap;}
-function showAddBtns(){document.getElementById('addPostBtnBottom').style.display=(currentSheet==='nimma')?'block':'none';}
+function resetPassTimerOnActivity(){if(!isEditing())return;startPassTimer();}
+function showAddBtns(){let show=(currentSheet==='nimma');document.getElementById('addPostBtn').style.display=show?'block':'none';document.getElementById('addPostBtnBottom').style.display=show?'block':'none';}
+function forceNormalView(){document.body.classList.remove('editing');let eb=document.getElementById('edit-bar');if(eb)eb.style.display='none';let fs=document.getElementById('float-save');if(fs)fs.style.display='none';let dc=document.getElementById('delContactBtn');if(dc)dc.style.display='none';showAddBtns();document.querySelectorAll('[data-edit]').forEach(e=>{if(e.closest('#sheet-title') && isOpenSheet()){e.contentEditable=true;}else{e.contentEditable=false;}});if(isOpenSheet()){document.getElementById('sheet-text').contentEditable=true;}else if(currentSheet==='samparka'){document.getElementById('sheet-text').contentEditable=false;}else{document.getElementById('sheet-text').contentEditable=true;}renderPosts();}
+function handleLinkClick(e,a){if(isEditing()){e.preventDefault();return false;}return true;}
+function navGo(key){if(isEditing()){return;}if(key=='home'){goHome();return;}openSheet(key);}
+function goBack(){if(isEditing())return;closeSheet();}
+function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
+window.addEventListener('load',function(){forceNormalView();loadCornerPhoto();initCornerDrag();});
+document.addEventListener('keydown',resetPassTimerOnActivity);
+document.addEventListener('input',function(e){resetPassTimerOnActivity();if(e.target && e.target.classList && e.target.classList.contains('post-text')){savePosts();}});
+document.addEventListener('paste',function(e){let t=e.target;if(t && (t.classList.contains('full-edit')||t.classList.contains('post-text'))){e.preventDefault();let text=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,text);}});
 function loadCornerPhoto(){let d='';try{d=localStorage.getItem('corner-photo')||'';}catch(err){d='';}let img=document.getElementById('cornerPhoto');let empty=document.getElementById('cornerPhotoEmpty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='none';}
 try{let w=localStorage.getItem('corner-w');let h=localStorage.getItem('corner-h');let t=localStorage.getItem('corner-t');let l=localStorage.getItem('corner-l');let wrap=document.getElementById('cornerWrap');if(w&&h){wrap.style.width=w+'px';wrap.style.height=h+'px';}if(t&&l){wrap.style.top=t+'px';wrap.style.left=l+'px';wrap.style.right='auto';}}catch(err){}}
-function pickCornerPhoto(){let inp=document.getElementById('cornerFileInput');inp.value='';inp.click();}
+function pickCornerPhoto(){if(!isEditing()){return;}let inp=document.getElementById('cornerFileInput');inp.value='';inp.click();}
 document.getElementById('cornerFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('corner-photo',d);}catch(err){}loadCornerPhoto();};r.readAsDataURL(f);e.target.value='';});
 let cornerDragging=false;let cornerResizing=false;let cornerMoved=false;let startX=0;let startY=0;let startW=0;let startH=0;let startTop=0;let startLeft=0;
 function initCornerDrag(){let wrap=document.getElementById('cornerWrap');let handle=document.getElementById('cornerDrag');
 handle.addEventListener('pointerdown',function(e){e.stopPropagation();e.preventDefault();cornerResizing=true;cornerMoved=true;startX=e.clientX;startY=e.clientY;startW=wrap.offsetWidth;startH=wrap.offsetHeight;try{handle.setPointerCapture(e.pointerId);}catch(err){}});
 wrap.addEventListener('pointerdown',function(e){if(e.target===handle)return;cornerDragging=true;cornerMoved=false;startX=e.clientX;startY=e.clientY;let r=wrap.getBoundingClientRect();startTop=r.top+window.scrollY;startLeft=r.left+window.scrollX;try{wrap.setPointerCapture(e.pointerId);}catch(err){}});
 wrap.addEventListener('pointermove',function(e){if(cornerResizing){let nw=startW+(e.clientX-startX);let nh=startH+(e.clientY-startY);nw=Math.max(80,Math.min(320,nw));nh=Math.max(100,Math.min(420,nh));wrap.style.width=nw+'px';wrap.style.height=nh+'px';cornerMoved=true;}else if(cornerDragging){let dx=e.clientX-startX;let dy=e.clientY-startY;if(Math.abs(dx)>4||Math.abs(dy)>4)cornerMoved=true;let nt=startTop+dy;let nl=startLeft+dx;nt=Math.max(60,Math.min(window.innerHeight-80,nt));nl=Math.max(0,Math.min(window.innerWidth-90,nl));wrap.style.top=nt+'px';wrap.style.left=nl+'px';wrap.style.right='auto';}});
-wrap.addEventListener('pointerup',function(e){if(cornerResizing||cornerDragging){try{localStorage.setItem('corner-w',wrap.offsetWidth);localStorage.setItem('corner-h',wrap.offsetHeight);localStorage.setItem('corner-t',parseInt(wrap.style.top)||wrap.offsetTop);localStorage.setItem('corner-l',parseInt(wrap.style.left)||wrap.offsetLeft);}catch(err){}}let wasMoved=cornerMoved;cornerDragging=false;cornerResizing=false;setTimeout(()=>{cornerMoved=false;},50);if(!wasMoved){pickCornerPhoto();}});
+wrap.addEventListener('pointerup',function(e){if(cornerResizing||cornerDragging){try{localStorage.setItem('corner-w',wrap.offsetWidth);localStorage.setItem('corner-h',wrap.offsetHeight);localStorage.setItem('corner-t',parseInt(wrap.style.top)||wrap.offsetTop);localStorage.setItem('corner-l',parseInt(wrap.style.left)||wrap.offsetLeft);}catch(err){}}let wasMoved=cornerMoved;cornerDragging=false;cornerResizing=false;setTimeout(()=>{cornerMoved=false;},50);if(!wasMoved && isEditing()){pickCornerPhoto();}});
 wrap.addEventListener('click',function(e){e.stopPropagation();});}
+function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer();passCount=setInterval(updatePassTimer,1000);passTimer=setTimeout(()=>{autoLock();},PASS_LIMIT*1000);}
+function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
+function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
 function enableTotalEdit(){document.querySelectorAll('[data-edit]').forEach(e=>{e.contentEditable=true;});document.getElementById('sheet-text').contentEditable=true;showAddBtns();renderPosts();}
-function updateGmail(){let m=document.getElementById('mailInput').value.trim();document.getElementById('gmailLink').href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(m)+"&su=Guest%20House%20Booking";}
-function copyFullCode(){let code="<!DOCTYPE html>\n"+document.documentElement.outerHTML;navigator.clipboard.writeText(code);document.getElementById('sheet-msg').innerText='✅ Code Copy ಆಯ್ತು';}
-function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();}
+function autoLock(){if(!isEditing())return;saveAllSilent();forceNormalView();stopPassTimer();}
+function updateGmail(){if(!isEditing())return;let m=document.getElementById('mailInput').value.trim();document.getElementById('gmailLink').href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(m)+"&su=Guest%20House%20Booking";}
+function copyFullCode(){let was=isEditing();forceNormalView();let code="<!DOCTYPE html>\n"+document.documentElement.outerHTML;navigator.clipboard.writeText(code);document.getElementById('sheet-msg').innerText='✅ Code Copy ಆಯ್ತು';if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
+function deleteContact(){if(isEditing()){document.getElementById('contact-block').innerHTML='<p style="text-align:center;color:#F5D67A;padding:20px">ಸಂಪರ್ಕ ಬಾಕ್ಸ್ ತೆಗೆಯಲಾಗಿದೆ.</p>';saveSheet();}}
+function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();let r=document.createRange();r.selectNodeContents(el);r.collapse(false);let s=window.getSelection();s.removeAllRanges();s.addRange(r);el.scrollIntoView({behavior:'smooth',block:'center'});}
 function getPosts(){try{let a=JSON.parse(localStorage.getItem('nimma-posts')||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
 function savePosts(){let posts=[];document.querySelectorAll('.post-box').forEach(function(box){posts.push({img:box.querySelector('.post-img').src||'',text:box.querySelector('.post-text').innerHTML||'',dt:box.dataset.dt||new Date().toISOString()});});try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}}
 function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){posts=[{img:'',text:'',dt:new Date().toISOString()}];try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}}
@@ -142,23 +171,22 @@ area.innerHTML='';posts.forEach(function(p,i){let div=document.createElement('di
 div.innerHTML='<img class="post-img" src="'+(p.img||'')+'" style="display:'+(p.img?'block':'none')+'"><div class="post-btns"><button class="sheet-photo-btn" type="button" onclick="pickPostPhoto('+i+')">Upload Photo</button> <button class="del-post-btn" type="button" onclick="deletePost('+i+')">Delete</button></div><div class="post-text" contenteditable="true">'+(p.text||'')+'</div><div class="post-date">'+fmtDateTime(p.dt)+'</div>';
 area.appendChild(div);});}
 function addPost(){let posts=getPosts();posts.push({img:'',text:'',dt:new Date().toISOString()});try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}renderPosts();setTimeout(function(){let els=document.querySelectorAll('.post-box');if(els.length)els[els.length-1].scrollIntoView({behavior:'smooth',block:'start'});let txts=document.querySelectorAll('.post-text');if(txts.length)txts[txts.length-1].focus();},100);}
-function deletePost(i){let posts=getPosts();posts.splice(i,1);try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}renderPosts();}
-function pickPostPhoto(i){currentPostIdx=i;let inp=document.getElementById('postFileInput');inp.value='';inp.click();}
+function deletePost(i){if(!isEditing())return;let posts=getPosts();posts.splice(i,1);try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}renderPosts();}
+function pickPostPhoto(i){currentPostIdx=i;if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('postFileInput');inp.value='';inp.click();}
 document.getElementById('postFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||currentPostIdx<0)return;let r=new FileReader();r.onload=function(ev){let posts=getPosts();if(posts[currentPostIdx]){posts[currentPostIdx].img=ev.target.result;try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(err){}renderPosts();}};r.readAsDataURL(f);e.target.value='';});
-function navGo(key){if(key=='home'){goHome();return;}openSheet(key);}
-function goBack(){closeSheet();}
-function goHome(){closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
-window.addEventListener('load',function(){enableTotalEdit();loadCornerPhoto();initCornerDrag();});
-document.addEventListener('input',function(e){if(e.target && e.target.classList && e.target.classList.contains('post-text')){savePosts();}});
-document.addEventListener('paste',function(e){let t=e.target;if(t && (t.classList.contains('full-edit')||t.classList.contains('post-text'))){e.preventDefault();let text=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,text);}});
-function openSheet(key){currentSheet=key;try{let t=localStorage.getItem('sheet-title-'+key)||titles[key]||key;let st=document.querySelector('#sheet-title [data-edit]');if(st)st.innerText=t;else document.getElementById('sheet-title').innerText=t;}catch(err){document.getElementById('sheet-title').innerText=titles[key]||key;}let s='';try{s=localStorage.getItem('sheet-'+key)||'';}catch(err){s='';}document.getElementById('sheet-text').innerHTML=s;document.getElementById('sheet-text').contentEditable=true;let titleEl=document.querySelector('#sheet-title [data-edit]');if(titleEl)titleEl.contentEditable=true;document.getElementById('sheet-msg').innerHTML='';let isSam=key=='samparka';let isNimma=key=='nimma';document.getElementById('contact-block').style.display=isSam?'block':'none';document.getElementById('photoWrap').style.display=(isSam||isNimma)?'none':'block';document.getElementById('typeBtn').style.display=(isSam||isNimma)?'none':'block';document.getElementById('sheet-text').style.display=(isSam||isNimma)?'none':'block';document.getElementById('posts-area').style.display=isNimma?'block':'none';showAddBtns();if(isNimma)renderPosts();let saveBtn=document.querySelector('.full-save');if(saveBtn)saveBtn.style.display='block';loadSheetPhoto();let fp=document.getElementById('full-page');fp.classList.add('open');fp.style.display='flex';document.body.style.overflow='hidden';fp.scrollTop=0;}
+function openSheet(key){currentSheet=key;try{let t=localStorage.getItem('sheet-title-'+key)||titles[key]||key;let st=document.querySelector('#sheet-title [data-edit]');if(st)st.innerText=t;else document.getElementById('sheet-title').innerText=t;}catch(err){document.getElementById('sheet-title').innerText=titles[key]||key;}let s='';try{s=localStorage.getItem('sheet-'+key)||'';}catch(err){s='';}document.getElementById('sheet-text').innerHTML=s;let open=isOpenSheet(key);document.getElementById('sheet-text').contentEditable=open;let titleEl=document.querySelector('#sheet-title [data-edit]');if(titleEl)titleEl.contentEditable=open||isEditing();document.getElementById('sheet-msg').innerHTML='';let isSam=key=='samparka';let isNimma=key=='nimma';document.getElementById('contact-block').style.display=isSam?'block':'none';document.getElementById('photoWrap').style.display=(isSam||isNimma)?'none':'block';document.getElementById('typeBtn').style.display=(isSam||isNimma)?'none':'block';document.getElementById('sheet-text').style.display=(isSam||isNimma)?'none':'block';document.getElementById('posts-area').style.display=isNimma?'block':'none';showAddBtns();if(isNimma)renderPosts();let saveBtn=document.querySelector('.full-save');if(saveBtn)saveBtn.style.display=isSam&&!isEditing()?'none':'block';loadSheetPhoto();let fp=document.getElementById('full-page');fp.classList.add('open');fp.style.display='flex';document.body.style.overflow='hidden';fp.scrollTop=0;}
 function closeSheet(){let fp=document.getElementById('full-page');fp.classList.remove('open');fp.style.display='none';document.body.style.overflow='';}
-function saveSheet(){if(currentSheet==='nimma'){savePosts();document.getElementById('sheet-msg').innerHTML='✅ save ಆಯ್ತು';return;}try{localStorage.setItem('sheet-'+currentSheet,document.getElementById('sheet-text').innerHTML);let st=document.querySelector('#sheet-title [data-edit]');localStorage.setItem('sheet-title-'+currentSheet,st?st.innerText:document.getElementById('sheet-title').innerText);}catch(err){}document.getElementById('sheet-msg').innerHTML='✅ save ಆಯ್ತು';}
+function saveSheet(){if(currentSheet==='nimma'){savePosts();document.getElementById('sheet-msg').innerHTML='✅ save ಆಯ್ತು';return;}if(currentSheet==='samparka'&&!isEditing())return;try{localStorage.setItem('sheet-'+currentSheet,document.getElementById('sheet-text').innerHTML);let st=document.querySelector('#sheet-title [data-edit]');localStorage.setItem('sheet-title-'+currentSheet,st?st.innerText:document.getElementById('sheet-title').innerText);if(isEditing())localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}document.getElementById('sheet-msg').innerHTML='✅ save ಆಯ್ತು';}
 function loadSheetPhoto(){let d='';try{d=localStorage.getItem('sheet-photo-'+currentSheet)||'';}catch(err){d='';}let img=document.getElementById('sheet-photo');let empty=document.getElementById('sheet-photo-empty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='block';}}
-function pickSheetPhoto(){let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
+function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
 document.getElementById('sheetFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||!currentSheet)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('sheet-photo-'+currentSheet,d);}catch(err){}loadSheetPhoto();};r.readAsDataURL(f);e.target.value='';});
-function saveAll(){savePosts();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}}
-enableTotalEdit();loadCornerPhoto();initCornerDrag();
+function removeSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;if(!currentSheet)return;try{localStorage.removeItem('sheet-photo-'+currentSheet);}catch(err){}loadSheetPhoto();if(isOpenSheet())pickSheetPhoto();}
+function askPassword(){if(isEditing()){return;}let p=prompt("Password:");if(!p)return;if(p==="abcde123"){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();document.getElementById('delContactBtn').style.display='inline-block';showAddBtns();let sb=document.querySelector('.full-save');if(sb)sb.style.display='block';startPassTimer();}}
+function exitEdit(){stopPassTimer();forceNormalView();saveAll();if(currentSheet==='samparka'){let sb=document.querySelector('.full-save');if(sb)sb.style.display='none';}}
+function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
+function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
+document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
+forceNormalView();loadCornerPhoto();initCornerDrag();
 </script>
 </body>
 </html>
