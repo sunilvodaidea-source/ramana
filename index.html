@@ -279,19 +279,28 @@ forceNormalView();loadCornerPhoto();initCornerDrag();
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
 import {
-  getFirestore, doc, getDoc, setDoc, serverTimestamp
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 import {
-  getAuth, signInWithEmailAndPassword,
-  signOut, onAuthStateChanged, setPersistence,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  setPersistence,
   browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 
 import {
-  getStorage, ref, uploadBytes, getDownloadURL
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-storage.js";
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
