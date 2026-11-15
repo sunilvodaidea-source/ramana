@@ -316,7 +316,7 @@ const ADMIN_EMAIL = "sunilvodaidea@gmail.com";
 await setPersistence(auth, browserSessionPersistence);
 
 
-window.adminLogin = async function(email, password) {
+window.adminLogin = \sync function(email, password) {
 
   if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
     throw new Error("Admin email ಮಾತ್ರ ಅನುಮತಿ ಇದೆ");
@@ -335,12 +335,12 @@ window.adminLogin = async function(email, password) {
 };
 
 
-window.adminLogout = async function() {
+window.adminLogout = sync function() {
   await signOut(auth);
 };
 
 
-async function uploadImage(data, path) {
+sync function uploadImage(data, path) {
 
   if (!data || !data.startsWith("data:")) {
     return data;
