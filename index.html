@@ -209,39 +209,25 @@ function removeSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;if
     alert("Login Failed: " + error.message);
   }
 }
-async function exitEdit() {
-  const saved = await saveAll();
+if (!window.isAdminAuthenticated) return false;
 
-  if (!saved) return;
+try {
+  savePosts();
 
-  stopPassTimer();
-
-  await window.adminLogout();
-}
-  if (!window.isAdminAuthenticated) return false;
-
-  try {
-    savePosts();
-
-    if (currentSheet) {
-      saveSheet();
-    }
-
-    const data = collectCloudData();
-
-    await window.saveToFirestore(data);
-
-    return true;
-  } catch (error) {
-    console.error("Auto save error:", error);
-    return false;
+  if (currentSheet) {
+    saveSheet();
   }
+
+  const data = collectCloudData();
+
+  await window.saveToFirestore(data);
+
+  return true;
+} catch (error) {
+  console.error("Auto save error:", error);
+  return false;
 }
-  async function saveAll() {
-  if (!window.isAdminAuthenticated) {
-    alert("Admin Login ಅಗತ್ಯವಿದೆ");
-    return false;
-  }
+}
 
   try {
     savePosts();
