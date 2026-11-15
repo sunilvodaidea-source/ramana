@@ -80,26 +80,7 @@ body.editing .del-post-btn{display:inline-block}
 <button class="nav-btn" type="button" onclick="navGo('home')"><span data-edit>ಮುಖಪುಟ</span></button>
 <button class="nav-btn" type="button" onclick="navGo('nimma')"><span data-edit>ನಿಮ್ಮ ಬರಹ</span></button>
 <button class="nav-btn" type="button" onclick="navGo('samparka')"><span data-edit>ಸಂಪರ್ಕ</span></button>
-  document.body.classList.add("editing");
-
-  document.getElementById("edit-bar").style.display = "block";
-  document.getElementById("float-save").style.display = "block";
-
-  enableTotalEdit();
-
-  const dc = document.getElementById("delContactBtn");
-
-  if (dc) {
-    dc.style.display = "inline-block";
-  }
-
-  startPassTimer();
-};
-
-window.deactivateAdminEditing = function() {
-  stopPassTimer();
-  forceNormalView();
-};
+  
 <button class="nav-btn" type="button" onclick="askPassword()"><span data-edit>🔑</span></button>
 </nav></header>
 <div class="corner-photo-wrap" id="cornerWrap"><img id="cornerPhoto" src="" alt=""><div id="cornerPhotoEmpty" class="corner-photo-empty"><span data-edit></span></div><div class="corner-hint"><span data-edit></span></div><div class="corner-drag" id="cornerDrag"></div></div>
