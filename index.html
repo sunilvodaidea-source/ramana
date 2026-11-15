@@ -276,14 +276,10 @@ forceNormalView();loadCornerPhoto();initCornerDrag();
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+mport { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
 import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  serverTimestamp
+  getFirestore, doc, getDoc, setDoc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 import {
@@ -301,7 +297,6 @@ import {
   uploadBytes,
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-storage.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
   authDomain: "ramana-website.firebaseapp.com",
