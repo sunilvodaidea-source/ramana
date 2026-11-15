@@ -80,6 +80,26 @@ body.editing .del-post-btn{display:inline-block}
 <button class="nav-btn" type="button" onclick="navGo('home')"><span data-edit>ಮುಖಪುಟ</span></button>
 <button class="nav-btn" type="button" onclick="navGo('nimma')"><span data-edit>ನಿಮ್ಮ ಬರಹ</span></button>
 <button class="nav-btn" type="button" onclick="navGo('samparka')"><span data-edit>ಸಂಪರ್ಕ</span></button>
+  document.body.classList.add("editing");
+
+  document.getElementById("edit-bar").style.display = "block";
+  document.getElementById("float-save").style.display = "block";
+
+  enableTotalEdit();
+
+  const dc = document.getElementById("delContactBtn");
+
+  if (dc) {
+    dc.style.display = "inline-block";
+  }
+
+  startPassTimer();
+};
+
+window.deactivateAdminEditing = function() {
+  stopPassTimer();
+  forceNormalView();
+};
 <button class="nav-btn" type="button" onclick="askPassword()"><span data-edit>🔑</span></button>
 </nav></header>
 <div class="corner-photo-wrap" id="cornerWrap"><img id="cornerPhoto" src="" alt=""><div id="cornerPhotoEmpty" class="corner-photo-empty"><span data-edit></span></div><div class="corner-hint"><span data-edit></span></div><div class="corner-drag" id="cornerDrag"></div></div>
@@ -161,7 +181,17 @@ function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer()
 function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
 function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
 function enableTotalEdit(){document.querySelectorAll('[data-edit]').forEach(e=>{e.contentEditable=true;});document.getElementById('sheet-text').contentEditable=true;showAddBtns();renderPosts();}
-function autoLock(){if(!isEditing())return;saveAllSilent();forceNormalView();stopPassTimer();}
+async function autoLock() {
+  if (!isEditing()) return;
+
+  await saveAllSilent();
+
+  stopPassTimer();
+
+  if (window.adminLogout) {
+    await window.adminLogout();
+  }
+}
 function updateGmail(){if(!isEditing())return;let m=document.getElementById('mailInput').value.trim();document.getElementById('gmailLink').href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(m)+"&su=Guest%20House%20Booking";}
 function copyFullCode(){let was=isEditing();forceNormalView();let code="<!DOCTYPE html>\n"+document.documentElement.outerHTML;navigator.clipboard.writeText(code);document.getElementById('sheet-msg').innerText='✅ Code Copy ಆಯ್ತು';if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 function deleteContact(){if(isEditing()){document.getElementById('contact-block').innerHTML='<p style="text-align:center;color:#F5D67A;padding:20px">ಸಂಪರ್ಕ ಬಾಕ್ಸ್ ತೆಗೆಯಲಾಗಿದೆ.</p>';saveSheet();}}
@@ -183,10 +213,77 @@ function loadSheetPhoto(){let d='';try{d=localStorage.getItem('sheet-photo-'+cur
 function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
 document.getElementById('sheetFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||!currentSheet)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('sheet-photo-'+currentSheet,d);}catch(err){}loadSheetPhoto();};r.readAsDataURL(f);e.target.value='';});
 function removeSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;if(!currentSheet)return;try{localStorage.removeItem('sheet-photo-'+currentSheet);}catch(err){}loadSheetPhoto();if(isOpenSheet())pickSheetPhoto();}
-function askPassword(){if(isEditing()){return;}let p=prompt("Password:");if(!p)return;if(p==="abcde123"){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();document.getElementById('delContactBtn').style.display='inline-block';showAddBtns();let sb=document.querySelector('.full-save');if(sb)sb.style.display='block';startPassTimer();}}
-function exitEdit(){stopPassTimer();forceNormalView();saveAll();if(currentSheet==='samparka'){let sb=document.querySelector('.full-save');if(sb)sb.style.display='none';}}
-function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
-function saveAll(){
+  async function askPassword() {
+  if (isEditing()) return;
+
+  const email = prompt("Admin Email:");
+  if (!email) return;
+
+  const password = prompt("Admin Password:");
+  if (!password) return;
+
+  try {
+    await window.adminLogin(email, password);
+  } catch (error) {
+    alert("Login Failed: " + error.message);
+  }
+}
+async function exitEdit() {
+  const saved = await saveAll();
+
+  if (!saved) return;
+
+  stopPassTimer();
+
+  await window.adminLogout();
+}
+  if (!window.isAdminAuthenticated) return false;
+
+  try {
+    savePosts();
+
+    if (currentSheet) {
+      saveSheet();
+    }
+
+    const data = collectCloudData();
+
+    await window.saveToFirestore(data);
+
+    return true;
+  } catch (error) {
+    console.error("Auto save error:", error);
+    return false;
+  }
+}
+  async function saveAll() {
+  if (!window.isAdminAuthenticated) {
+    alert("Admin Login ಅಗತ್ಯವಿದೆ");
+    return false;
+  }
+
+  try {
+    savePosts();
+
+    if (currentSheet) {
+      saveSheet();
+    }
+
+    const data = collectCloudData();
+
+    await window.saveToFirestore(data);
+
+    document.getElementById("sheet-msg").innerText =
+      "✅ Firebase Cloud Save ಯಶಸ್ವಿಯಾಗಿದೆ";
+
+    return true;
+
+  } catch (error) {
+    console.error(error);
+    alert("Cloud Save Error: " + error.message);
+    return false;
+  }
+}
   let was=isEditing();
   savePosts();
   forceNormalView();
@@ -211,28 +308,181 @@ forceNormalView();loadCornerPhoto();initCornerDrag();
 </script>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
-    authDomain: "ramana-website.firebaseapp.com",
-    projectId: "ramana-website",
-    storageBucket: "ramana-website.firebasestorage.app",
-    messagingSenderId: "1070413104086",
-    appId: "1:1070413104086:web:f85473281477903bcd9a77"
-  };
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+import {
+  getFirestore, doc, getDoc, setDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-  window.saveToFirestore = async function(htmlContent) {
-    try {
-      await setDoc(doc(db, "pages", "mainContent"), { content: htmlContent });
-    } catch (e) {
-      console.error("Error writing document: ", e);
+import {
+  getAuth, signInWithEmailAndPassword,
+  signOut, onAuthStateChanged, setPersistence,
+  browserSessionPersistence
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+  getStorage, ref, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-storage.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
+  authDomain: "ramana-website.firebaseapp.com",
+  projectId: "ramana-website",
+  storageBucket: "ramana-website.firebasestorage.app",
+  messagingSenderId: "1070413104086",
+  appId: "1:1070413104086:web:f85473281477903bcd9a77"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
+
+const ADMIN_EMAIL = "sunilvodaidea@gmail.com";
+
+await setPersistence(auth, browserSessionPersistence);
+
+
+window.adminLogin = async function(email, password) {
+
+  if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
+    throw new Error("Admin email ಮಾತ್ರ ಅನುಮತಿ ಇದೆ");
+  }
+
+  const result = await signInWithEmailAndPassword(
+    auth, email.trim(), password
+  );
+
+  if (result.user.email !== ADMIN_EMAIL) {
+    await signOut(auth);
+    throw new Error("Admin access denied");
+  }
+
+  return true;
+};
+
+
+window.adminLogout = async function() {
+  await signOut(auth);
+};
+
+
+async function uploadImage(data, path) {
+
+  if (!data || !data.startsWith("data:")) {
+    return data;
+  }
+
+  const blob = await (await fetch(data)).blob();
+
+  const fileRef = ref(storage, path);
+
+  await uploadBytes(fileRef, blob);
+
+  return await getDownloadURL(fileRef);
+}
+
+
+window.saveToFirestore = async function(snapshot) {
+
+  if (!auth.currentUser ||
+      auth.currentUser.email !== ADMIN_EMAIL) {
+    throw new Error("Admin login required");
+  }
+
+  const items = {...snapshot.items};
+
+  for (const key of Object.keys(items)) {
+
+    if (
+      key === "corner-photo" ||
+      key.startsWith("sheet-photo-")
+    ) {
+      items[key] = await uploadImage(
+        items[key],
+        "website/" + key
+      );
     }
-  };
+  }
+
+  if (items["nimma-posts"]) {
+
+    const posts = JSON.parse(items["nimma-posts"]);
+
+    for (let i = 0; i < posts.length; i++) {
+
+      if (posts[i].img && posts[i].img.startsWith("data:")) {
+
+        posts[i].img = await uploadImage(
+          posts[i].img,
+          "website/posts/post-" + i + "-" + Date.now()
+        );
+      }
+    }
+
+    items["nimma-posts"] = JSON.stringify(posts);
+  }
+
+  await setDoc(
+    doc(db, "pages", "mainContent"),
+    {
+      items: items,
+      updatedAt: serverTimestamp()
+    }
+  );
+
+  return {items};
+};
+
+
+window.loadFromFirestore = async function() {
+
+  const snap = await getDoc(
+    doc(db, "pages", "mainContent")
+  );
+
+  if (!snap.exists()) return null;
+
+  return snap.data().items || null;
+};
+
+
+onAuthStateChanged(auth, user => {
+
+  window.isAdminAuthenticated =
+    !!user && user.email === ADMIN_EMAIL;
+
+  if (window.isAdminAuthenticated) {
+
+    if (window.activateAdminEditing) {
+      window.activateAdminEditing();
+    }
+
+  } else {
+
+    if (window.deactivateAdminEditing) {
+      window.deactivateAdminEditing();
+    }
+  }
+
+});
+
+
+try {
+
+  const items = await window.loadFromFirestore();
+
+  if (items && window.applyCloudData) {
+    window.applyCloudData(items);
+  }
+
+} catch (error) {
+
+  console.error("Cloud loading error:", error);
+
+}
+
 </script>
-</body>
-</html>
