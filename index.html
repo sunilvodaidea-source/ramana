@@ -4,19 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</title>
-<meta name="google-site-verification" content="wNHMqXp8xwPn7k52dipLFHos_0IzrGymNZXzlTu3cfs" />
+<meta name="google-site-verification" content="wNHMqXp8xwPn7k52dipLFHos_0IzrGymNZXzlTu3cfs">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0A2A5E;color:#fff;font-family:Arial;text-align:center;overflow-x:hidden}
+*{box-sizing:border-box}
+body{margin:0;background:#0A2A5E;color:#fff;font-family:Arial,sans-serif;text-align:center;overflow-x:hidden}
 header{background:#0A2A5E;padding:14px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #C9A227;position:sticky;top:0;z-index:50}
-header b{color:#FFD700;font-size:19px;cursor:pointer}nav{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
-.nav-btn{background:transparent;border:none;color:#FFD700;font-size:15px;cursor:pointer;padding:10px 11px;border-radius:8px}
+header b{color:#FFD700;font-size:19px}
+nav{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.nav-btn{background:transparent;border:0;color:#FFD700;font-size:15px;cursor:pointer;padding:10px 11px;border-radius:8px}
 .nav-btn:hover{background:#143A7A}
-.corner-photo-wrap{position:absolute;top:68px;right:12px;width:150px;height:190px;border:none;border-radius:0;overflow:hidden;background:transparent;z-index:40;cursor:grab;touch-action:none;user-select:none}
-.corner-photo-wrap:active{cursor:grabbing}
-.corner-photo-wrap img{width:100%;height:100%;object-fit:cover;display:none;pointer-events:none}
-.corner-photo-empty{width:100%;height:100%;display:none;pointer-events:none}
-.corner-drag{position:absolute;right:0;bottom:0;width:26px;height:26px;background:transparent;color:transparent;font-size:1px;display:flex;align-items:center;justify-content:center;cursor:nwse-resize;z-index:5;opacity:0}
-.corner-hint{position:absolute;left:0;bottom:0;background:transparent;color:transparent;font-size:1px;padding:3px 6px;pointer-events:none;opacity:0;display:none}
 .hero{padding:45px 20px 10px}.star{font-size:42px}.hero h1{font-size:52px;margin:12px 0 5px}.hero p{font-size:17px;margin:8px 0 20px}
 .editor{padding:28px 20px 30px;text-align:center}
 .pill{color:#F5D67A;border:1.5px solid #F5D67A;display:inline-block;padding:4px 20px;border-radius:50%;font-size:16px;margin:0}
@@ -25,277 +21,277 @@ footer{padding:14px;font-size:15px}
 #full-page{position:fixed;inset:0;width:100%;height:100vh;background:#0A2A5E;z-index:100;display:none;flex-direction:column;overflow-y:auto}
 #full-page.open{display:flex}
 .full-top{background:#0A2A5E;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #C9A227;position:sticky;top:0;gap:8px}
-.full-top b{color:#FFD700;font-size:19px}.back-btn{background:#E8D9A8;color:#000;border:none;padding:9px 18px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px}
-.edit-inside-btn{background:#FFD700;color:#000;border:none;padding:9px 16px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px}
-.full-title{text-align:center;padding:25px 20px 5px}.full-title h1{font-size:32px;margin:0;outline:none}.full-title p{color:#F5D67A;font-size:16px}
+.full-top b{color:#FFD700;font-size:19px}
+.back-btn,.edit-inside-btn{border:0;padding:9px 16px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:15px}
+.back-btn{background:#E8D9A8;color:#000}.edit-inside-btn{background:#FFD700;color:#000}
+.full-title{text-align:center;padding:25px 20px 5px}.full-title h1{font-size:32px;margin:0}.full-title p{color:#F5D67A;font-size:16px}
 .sheet-photo-wrap{margin:18px 20px 0;border:1px solid #C9A227;border-radius:8px;background:#000;overflow:hidden}
-.sheet-photo-wrap img{width:100%;height:auto;max-height:420px;object-fit:contain;display:none;background:#000;cursor:pointer}
+.sheet-photo-wrap img{width:100%;height:auto;max-height:420px;object-fit:contain;display:none;background:#000}
 .sheet-photo-empty{background:#000;height:85px;display:block}
 .sheet-photo-btns{padding:18px 10px;background:#0E2F66;text-align:center}
-.sheet-photo-btn{background:#FFD700;color:#000;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;font-size:16px;cursor:pointer;margin:4px}
-.type-hint-btn{display:block;width:calc(100% - 40px);background:#fff;color:#0A2A5E;border:none;padding:14px 20px;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer;margin:15px 20px 0;text-align:center}
-.full-edit{margin:10px 20px 20px;border:1px dashed #C9A227;border-radius:8px;padding:22px;font-size:20px;line-height:1.9;background:#0A2A5E;outline:none;text-align:left;min-height:320px;cursor:text;color:#fff}
-.full-edit *{color:#fff!important;background:transparent!important}
+.sheet-photo-btn{background:#FFD700;color:#000;border:0;padding:12px 20px;border-radius:20px;font-weight:bold;font-size:16px;cursor:pointer;margin:4px}
+.type-hint-btn{display:block;width:calc(100% - 40px);background:#fff;color:#0A2A5E;border:0;padding:14px 20px;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer;margin:15px 20px 0}
+.full-edit{margin:10px 20px 20px;border:1px dashed #C9A227;border-radius:8px;padding:22px;font-size:20px;line-height:1.9;background:#0A2A5E;outline:none;text-align:left;min-height:320px;color:#fff}
 .full-edit:empty:before{content:"ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ ಬರೆಯಿರಿ...";color:#9AB0D6}
-.full-save{text-align:center;padding:0 0 25px}.save-btn{background:gold;color:#000;padding:12px 30px;border:none;border-radius:20px;font-weight:bold;font-size:17px;cursor:pointer}
+.full-save{text-align:center;padding:0 0 25px}.save-btn{background:gold;color:#000;padding:12px 30px;border:0;border-radius:20px;font-weight:bold;font-size:17px;cursor:pointer}
 #edit-bar{display:none;background:gold;color:#000;padding:10px;position:fixed;top:0;left:0;right:0;z-index:300;font-weight:bold;text-align:center}
 #edit-indicator{display:none;background:#ff4444;color:#fff;font-size:12px;padding:4px 10px;border-radius:12px;margin-left:8px}
-#float-save{display:none;position:fixed;bottom:20px;right:20px;background:gold;color:#000;padding:14px 22px;border:none;border-radius:30px;font-weight:bold;font-size:17px;cursor:pointer;z-index:310}
-#idle-info{font-size:13px;font-weight:normal}
-[data-edit]{outline:none!important}
-.editing [data-edit]{outline:1px dotted rgba(255,215,0,.35)!important}
-.editing [data-edit]:hover,.editing [data-edit]:focus{outline:1px dashed gold!important;cursor:text;background:rgba(255,215,0,.12)}
-.editing button,.editing a{cursor:text}
-.contact-box{margin:0;border:none;border-radius:0;background:transparent;padding:0;text-align:center;max-width:none;width:100%}
+#float-save{display:none;position:fixed;bottom:20px;right:20px;background:gold;color:#000;padding:14px 22px;border:0;border-radius:30px;font-weight:bold;font-size:17px;cursor:pointer;z-index:310}
+[data-edit]{outline:none}
+.editing [data-edit]{outline:1px dotted rgba(255,215,0,.35)}
+.editing [data-edit]:hover,.editing [data-edit]:focus{outline:1px dashed gold;cursor:text;background:rgba(255,215,0,.12)}
+.contact-box{margin:0;border:0;background:transparent;padding:0;text-align:center;width:100%}
 .contact-box h3{color:#F5D67A;margin:0;padding:14px 10px;font-size:19px;border-top:1px solid #C9A227;border-bottom:1px solid #C9A227}
-.wa-btn{display:block;background:#25D366;color:#fff!important;text-decoration:none;padding:16px;border-radius:0;font-weight:bold;font-size:21px;margin:0;text-align:center;white-space:normal;line-height:1.4}
+.wa-btn{display:block;background:#25D366;color:#fff!important;text-decoration:none;padding:16px;font-weight:bold;font-size:21px;margin:0;line-height:1.4}
 .contact-sub{color:#F5D67A;margin:0;padding:14px 10px;font-size:16px;border-bottom:1px solid #C9A227}
-.web-link{display:block;background:transparent;border:none;border-bottom:1px solid #C9A227;color:#F5D67A!important;text-decoration:none;padding:14px 10px;border-radius:0;margin:0;font-size:17px;word-break:break-all;text-align:center}
-.mail-box{background:transparent;border:none;border-bottom:1px solid #C9A227;border-radius:0;padding:16px 10px 18px;margin:0}
+.web-link{display:block;background:transparent;border:0;border-bottom:1px solid #C9A227;color:#F5D67A!important;text-decoration:none;padding:14px 10px;margin:0;font-size:17px;word-break:break-all}
+.mail-box{background:transparent;border:0;border-bottom:1px solid #C9A227;padding:16px 10px 18px;margin:0}
 .mail-box a{color:#FFD700;font-weight:bold;word-break:break-all}
-.gmail-btn{display:inline-block;background:#FFD700;color:#000!important;text-decoration:none;padding:13px 28px;border-radius:25px;font-weight:bold;font-size:18px;margin-top:12px;white-space:normal;line-height:1.4}
+.gmail-btn{display:inline-block;background:#FFD700;color:#000!important;text-decoration:none;padding:13px 28px;border-radius:25px;font-weight:bold;font-size:18px;margin-top:12px;line-height:1.4}
 .site-pill{display:inline-block;background:transparent;color:#fff!important;text-decoration:none;border:1.5px solid #fff;padding:10px 22px;border-radius:25px;font-size:16px;margin-top:14px}
-.edit-link-input{display:none!important;width:100%;background:#fff;color:#000;border:none;padding:10px;border-radius:8px;margin:6px 0;font-size:14px}
-.edit-link-label{display:none!important;font-size:13px;color:#F5D67A;text-align:left;margin:8px 0 2px}
-body.editing .edit-link-input{display:block!important}
-body.editing .edit-link-label{display:block!important}
-body.editing #edit-indicator{display:inline-block!important}
+.edit-link-input{display:none;width:100%;background:#fff;color:#000;border:0;padding:10px;border-radius:8px;margin:6px 0;font-size:14px}
+.edit-link-label{display:none;font-size:13px;color:#F5D67A;text-align:left;margin:8px 0 2px}
+body.editing .edit-link-input,body.editing .edit-link-label{display:block}
+body.editing #edit-indicator{display:inline-block}
 #posts-area{display:none;margin:10px 20px 20px;text-align:left}
 .post-box{border:1px solid #C9A227;border-radius:10px;overflow:hidden;margin:0 0 20px;background:#0A2A5E}
 .post-box img.post-img{width:100%;max-height:420px;object-fit:contain;display:none;background:#000}
 .post-box .post-btns{text-align:center;padding:12px;background:#0E2F66}
 .post-box .post-text{padding:18px;font-size:19px;line-height:1.9;outline:none;min-height:100px;color:#fff;background:#0A2A5E}
-.post-box .post-text *{color:#fff!important;background:transparent!important}
 .post-box .post-text:empty:before{content:"ಇಲ್ಲಿ ಬರೆಯಿರಿ...";color:#9AB0D6}
 .post-date{padding:0 18px 16px;color:#F5D67A;font-size:14px;text-align:right}
-.add-post-btn{display:none;width:calc(100% - 40px);margin:0 20px 15px;background:#FFD700;color:#000;border:none;padding:13px;border-radius:20px;font-weight:bold;font-size:16px;cursor:pointer}
-.add-post-btn-bottom{display:none;width:calc(100% - 40px);margin:10px 20px 10px;background:#FFD700;color:#000;border:none;padding:15px;border-radius:20px;font-weight:bold;font-size:17px;cursor:pointer}
-.del-post-btn{background:#ff4444;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
+.add-post-btn,.add-post-btn-bottom{display:none;width:calc(100% - 40px);margin:10px 20px;background:#FFD700;color:#000;border:0;padding:14px;border-radius:20px;font-weight:bold;font-size:16px;cursor:pointer}
+.del-post-btn{background:#ff4444;color:#fff;border:0;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
 body.editing .del-post-btn{display:inline-block}
-@media(max-width:600px){.hero h1{font-size:36px}header{flex-direction:column;gap:8px}.editor h2{font-size:19px}.full-title h1{font-size:26px}.corner-photo-wrap{top:98px;right:8px;width:110px;height:140px}}
+#sheet-msg{color:#90FF90}
+@media(max-width:600px){.hero h1{font-size:36px}header{flex-direction:column;gap:8px}.editor h2{font-size:19px}.full-title h1{font-size:26px}}
 </style>
 </head>
 <body>
-<header><b><span data-edit onclick="goHome()">✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span></b><nav>
-<button class="nav-btn" type="button" onclick="navGo('home')"><span data-edit>ಮುಖಪುಟ</span></button>
-<button class="nav-btn" type="button" onclick="navGo('nimma')"><span data-edit>ನಿಮ್ಮ ಬರಹ</span></button>
-<button class="nav-btn" type="button" onclick="navGo('samparka')"><span data-edit>ಸಂಪರ್ಕ</span></button>
-  
-<button class="nav-btn" type="button" onclick="askPassword()"><span data-edit>🔑</span></button>
-</nav></header>
-<div class="corner-photo-wrap" id="cornerWrap"><img id="cornerPhoto" src="" alt=""><div id="cornerPhotoEmpty" class="corner-photo-empty"><span data-edit></span></div><div class="corner-hint"><span data-edit></span></div><div class="corner-drag" id="cornerDrag"></div></div>
-<input type="file" id="cornerFileInput" accept="image/*" style="display:none">
-<div id="edit-bar"><span data-edit>✏️ ಎಡಿಟ್ - ಪ್ರತಿ ಅಕ್ಷರ ತಿದ್ದಬಹುದು</span> <span id="idle-info"><span data-edit>15:00</span></span> <button onclick="saveAll()" style="background:#0A2A5E;color:#fff;padding:8px 20px;border:none;border-radius:15px;font-weight:bold;cursor:pointer"><span data-edit>save</span></button> <button onclick="copyFullCode()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>📋 Copy Code</span></button> <button onclick="exitEdit()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>ಮುಗಿಸು</span></button></div>
-<div id="home"><div class="hero"><div class="star"><span data-edit>✦</span></div><h1><span data-edit>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span></h1><p><span data-edit>ಅರುಣಾಚಲ ಶಿವ</span></p></div></div>
-<div class="editor"><p class="pill"><span data-edit>ಸಂಪಾದಕರು</span></p><h2><span data-edit>ವೆಬ್ ಪೇಜ್ ಸಂಪಾದಕರು : ಚಿನ್ವತ ( ಸುನಿಲ್ )</span></h2><p><span data-edit>Mail ID: sunilvodaidea@gmail.com</span></p></div>
-<footer><span data-edit>© 2026 ಚಿನ್ವತ ಶ್ರೀ ರಮಣ ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</span></footer>
-<button id="float-save" type="button" onclick="saveAll()"><span data-edit>save</span></button>
-<input type="file" id="sheetFileInput" accept="image/*" style="display:none">
-<input type="file" id="postFileInput" accept="image/*" style="display:none">
-<div id="full-page">
-<div class="full-top"><b><span data-edit>✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span><span id="edit-indicator"><span data-edit>✏️ EDIT ON</span></span></b><div><button class="edit-inside-btn" type="button" onclick="askPassword()"><span data-edit>✏️ ತಿದ್ದು</span></button> <button class="back-btn" type="button" onclick="goBack()"><span data-edit>← ಹಿಂದೆ</span></button></div></div>
-<div class="full-title"><h1 id="sheet-title"><span data-edit>ನಿಮ್ಮ ಪೋಸ್ಟ್</span></h1><p><span data-edit>✦</span></p></div>
-<button id="addPostBtn" class="add-post-btn" type="button" onclick="addPost()">+ ಹೊಸ ಪೋಸ್ಟ್ ಸೇರಿಸಿ</button>
-<div id="posts-area"></div>
-<div id="photoWrap" class="sheet-photo-wrap"><img id="sheet-photo" src="" alt="" onclick="pickSheetPhoto()"><div id="sheet-photo-empty" class="sheet-photo-empty"><span data-edit></span></div><div class="sheet-photo-btns"><button class="sheet-photo-btn" type="button" onclick="pickSheetPhoto()"><span data-edit>Upload Photo</span></button></div></div>
-<button id="typeBtn" class="type-hint-btn" type="button" onclick="focusTyping()"><span data-edit>ನಿಮ್ಮ ಬರಹ/ಪೋಸ್ಟ್</span></button>
-<div id="sheet-text" class="full-edit" contenteditable="true"></div>
-<div id="contact-block" style="display:none">
-<div class="contact-box" id="contactBox">
-<h3><span data-edit>📞 ಸಂಪರ್ಕಿಸಿ</span></h3>
-<a class="wa-btn" id="waLink" href="https://whatsapp.com/channel/0029Vb9rGruAu3aXQXS8kG1m" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>WhatsApp</span></a>
-<div class="edit-link-label"><span data-edit>WhatsApp Link - ಇಲ್ಲಿ Link ಬದಲಾಯಿಸಿ</span></div>
-<input class="edit-link-input" id="waInput" value="https://whatsapp.com/channel/0029Vb9rGruAu3aXQXS8kG1m" oninput="document.getElementById('waLink').href=this.value">
-<p class="contact-sub"><span data-edit>🌐 ನಮ್ಮ ಇತರೆ ವೆಬ್ ಪೇಜ್ ಗಳು</span></p>
-<a class="web-link" id="webLink1" href="https://robert-adams.vercel.app/" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>🔗 Robert Adams - Web Page 1 →</span></a>
-<div class="edit-link-label"><span data-edit>Web Page 1 Link - ಇಲ್ಲಿ Link ಬದಲಾಯಿಸಿ</span></div>
-<input class="edit-link-input" value="https://robert-adams.vercel.app/" oninput="document.getElementById('webLink1').href=this.value">
-<a class="web-link" id="webLink2" href="https://elaborate-paletas-cf9e68.netlify.app/" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>🔗 Web Page 2 →</span></a>
-<div class="edit-link-label"><span data-edit>Web Page 2 Link - ಇಲ್ಲಿ Link ಬದಲಾಯಿಸಿ</span></div>
-<input class="edit-link-input" value="https://elaborate-paletas-cf9e68.netlify.app/" oninput="document.getElementById('webLink2').href=this.value">
-<div class="mail-box">
-<div style="color:#F5D67A"><span data-edit>ತಿರುವಣ್ಣಾಮಲೆ ಶ್ರೀ ರಮಣ ಆಶ್ರಮ Guest House Booking</span></div>
-<div style="margin-top:10px"><span data-edit>Mail ID:</span> <span data-edit id="mailText">ashram@gururamana.org</span></div>
-<div class="edit-link-label"><span data-edit>Mail ID - ಇಲ್ಲಿ Mail ಬದಲಾಯಿಸಿ</span></div>
-<input class="edit-link-input" id="mailInput" value="ashram@gururamana.org" oninput="document.getElementById('mailText').innerText=this.value;updateGmail()">
-<a class="gmail-btn" id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=ashram@gururamana.org&su=Guest%20House%20Booking%20-%20Ramana%20Ashram" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>📧 Google Gmail</span></a><br>
-<a class="site-pill" id="siteLink" href="https://www.gururamana.org" target="_blank" onclick="return handleLinkClick(event,this)"><span data-edit>https://www.gururamana.org</span></a><br>
+<header>
+  <b>✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</b>
+  <nav>
+    <button class="nav-btn" type="button" onclick="goHome()">ಮುಖಪುಟ</button>
+    <button class="nav-btn" type="button" onclick="navGo('nimma')">ನಿಮ್ಮ ಬರಹ</button>
+    <button class="nav-btn" type="button" onclick="navGo('samparka')">ಸಂಪರ್ಕ</button>
+    <button class="nav-btn" type="button" onclick="askPassword()">🔑</button>
+  </nav>
+</header>
+
+<div id="edit-bar">
+  ✏️ ಎಡಿಟ್ ಮೋಡ್ <span id="idle-info">15:00</span>
+  <button onclick="saveAll()" style="background:#0A2A5E;color:#fff;padding:8px 20px;border:0;border-radius:15px;font-weight:bold;cursor:pointer">Save</button>
+  <button onclick="exitEdit()" style="background:#fff;padding:8px 15px;border:0;border-radius:15px;cursor:pointer">ಮುಗಿಸು</button>
 </div>
-<button onclick="deleteContact()" type="button" style="background:#ff4444;color:#fff;border:none;padding:10px 18px;border-radius:20px;margin-top:14px;cursor:pointer;display:none" id="delContactBtn"><span data-edit>🗑️ ಈ ಸಂಪರ್ಕ ಬಾಕ್ಸ್ ತೆಗೆಯಿರಿ</span></button>
-</div></div>
-<div class="full-save">
-<button id="addPostBtnBottom" class="add-post-btn-bottom" type="button" onclick="addPost()">+ ಮುಂದಿನ ಪೋಸ್ಟ್ ಸೇರಿಸಿ ↓ Add Page</button>
-<br><button class="save-btn" type="button" onclick="saveSheet()"><span data-edit>save</span></button><p id="sheet-msg" style="color:#90FF90"><span data-edit></span></p></div>
+
+<div id="home">
+  <div class="hero"><div class="star">✦</div><h1 data-edit>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</h1><p data-edit>ಅರುಣಾಚಲ ಶಿವ</p></div>
+  <div class="editor"><p class="pill" data-edit>ಸಂಪಾದಕರು</p><h2 data-edit>ವೆಬ್ ಪೇಜ್ ಸಂಪಾದಕರು : ಚಿನ್ವತ ( ಸುನಿಲ್ )</h2><p data-edit>Mail ID: sunilvodaidea@gmail.com</p></div>
+  <footer data-edit>© 2026 ಚಿನ್ವತ ಶ್ರೀ ರಮಣ ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</footer>
+</div>
+
+<button id="float-save" type="button" onclick="saveAll()">Save</button>
+<input type="file" id="sheetFileInput" accept="image/*" hidden>
+<input type="file" id="postFileInput" accept="image/*" hidden>
+
+<div id="full-page">
+  <div class="full-top">
+    <b>✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ <span id="edit-indicator">✏️ EDIT ON</span></b>
+    <div><button class="edit-inside-btn" type="button" onclick="askPassword()">✏️ ತಿದ್ದು</button> <button class="back-btn" type="button" onclick="goBack()">← ಹಿಂದೆ</button></div>
+  </div>
+  <div class="full-title"><h1 id="sheet-title">ನಿಮ್ಮ ಪೋಸ್ಟ್</h1><p>✦</p></div>
+  <button id="addPostBtn" class="add-post-btn" type="button" onclick="addPost()">+ ಹೊಸ ಪೋಸ್ಟ್ ಸೇರಿಸಿ</button>
+  <div id="posts-area"></div>
+  <div id="photoWrap" class="sheet-photo-wrap">
+    <img id="sheet-photo" src="" alt="">
+    <div id="sheet-photo-empty" class="sheet-photo-empty"></div>
+    <div class="sheet-photo-btns"><button class="sheet-photo-btn" type="button" onclick="pickSheetPhoto()">Upload Photo</button></div>
+  </div>
+  <button id="typeBtn" class="type-hint-btn" type="button" onclick="focusTyping()">ನಿಮ್ಮ ಬರಹ/ಪೋಸ್ಟ್</button>
+  <div id="sheet-text" class="full-edit" contenteditable="false"></div>
+
+  <div id="contact-block" style="display:none">
+    <div class="contact-box" id="contactBox">
+      <h3>📞 ಸಂಪರ್ಕಿಸಿ</h3>
+      <a class="wa-btn" id="waLink" href="https://whatsapp.com/channel/0029Vb9rGruAu3aXQXS8kG1m" target="_blank" rel="noopener">WhatsApp</a>
+      <div class="edit-link-label">WhatsApp Link - ಇಲ್ಲಿ Link ಬದಲಾಯಿಸಿ</div>
+      <input class="edit-link-input" id="waInput" value="https://whatsapp.com/channel/0029Vb9rGruAu3aXQXS8kG1m">
+      <p class="contact-sub">🌐 ನಮ್ಮ ಇತರೆ ವೆಬ್ ಪೇಜ್ ಗಳು</p>
+      <a class="web-link" id="webLink1" href="https://robert-adams.vercel.app/" target="_blank" rel="noopener">🔗 Robert Adams - Web Page 1 →</a>
+      <div class="edit-link-label">Web Page 1 Link</div>
+      <input class="edit-link-input" id="webInput1" value="https://robert-adams.vercel.app/">
+      <a class="web-link" id="webLink2" href="https://elaborate-paletas-cf9e68.netlify.app/" target="_blank" rel="noopener">🔗 Web Page 2 →</a>
+      <div class="edit-link-label">Web Page 2 Link</div>
+      <input class="edit-link-input" id="webInput2" value="https://elaborate-paletas-cf9e68.netlify.app/">
+      <div class="mail-box">
+        <div style="color:#F5D67A">ತಿರುವಣ್ಣಾಮಲೆ ಶ್ರೀ ರಮಣ ಆಶ್ರಮ Guest House Booking</div>
+        <div style="margin-top:10px">Mail ID: <span id="mailText">ashram@gururamana.org</span></div>
+        <div class="edit-link-label">Mail ID</div>
+        <input class="edit-link-input" id="mailInput" value="ashram@gururamana.org">
+        <a class="gmail-btn" id="gmailLink" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ashram%40gururamana.org&amp;su=Guest%20House%20Booking" target="_blank" rel="noopener">📧 Google Gmail</a><br>
+        <a class="site-pill" href="https://www.gururamana.org" target="_blank" rel="noopener">https://www.gururamana.org</a>
+      </div>
+    </div>
+  </div>
+  <div class="full-save"><button class="save-btn" type="button" onclick="saveAll()">Save</button><p id="sheet-msg"></p></div>
+  <button id="addPostBtnBottom" class="add-post-btn-bottom" type="button" onclick="addPost()">+ ಮುಂದಿನ ಪೋಸ್ಟ್ ಸೇರಿಸಿ ↓ Add Page</button>
 </div>
 
 <script>
-let currentSheet='';let titles={'nimma':'ನಿಮ್ಮ ಪೋಸ್ಟ್','samparka':'ಸಂಪರ್ಕ','bodhane':'ನಿಮ್ಮ ಬರಹ / ಪೋಸ್ಟ್ / ಫೋಟೋಸ್','jeevana':'ಜೀವನಚರಿತ್ರೆ','grantha':'ನೀವು ಓದಿದ ಪುಸ್ತಕ / ಗ್ರಂಥಗಳು','chitra':'ಚಿತ್ರಗಳು','video':'ವೀಡಿಯೋ ವೀಕ್ಷಿಸಿ'};
-let passStart=0;let passTimer=null;let passCount=null;let PASS_LIMIT=900;
+const titles={nimma:'ನಿಮ್ಮ ಪೋಸ್ಟ್',samparka:'ಸಂಪರ್ಕ'};
+let currentSheet='';
+let passTimer=null,passCount=null,passStart=0;
+const PASS_LIMIT=900;
 let currentPostIdx=-1;
+
 function isEditing(){return document.body.classList.contains('editing');}
-function isOpenSheet(key){if(!key)key=currentSheet;return key!=='samparka' && key!=='home';}
-function fmt(s){let m=Math.floor(s/60);let sec=s%60;return m+":"+(sec<10?"0"+sec:sec);}
-function fmtDateTime(d){let dd=new Date(d);let day=String(dd.getDate()).padStart(2,'0');let mo=String(dd.getMonth()+1).padStart(2,'0');let y=dd.getFullYear();let h=dd.getHours();let ap=h>=12?'PM':'AM';let hh=h%12||12;let mm=String(dd.getMinutes()).padStart(2,'0');return day+'-'+mo+'-'+y+', '+hh+':'+mm+' '+ap;}
-function resetPassTimerOnActivity(){if(!isEditing())return;startPassTimer();}
-function showAddBtns(){let show=(currentSheet==='nimma');document.getElementById('addPostBtn').style.display=show?'block':'none';document.getElementById('addPostBtnBottom').style.display=show?'block':'none';}
-function forceNormalView(){document.body.classList.remove('editing');let eb=document.getElementById('edit-bar');if(eb)eb.style.display='none';let fs=document.getElementById('float-save');if(fs)fs.style.display='none';let dc=document.getElementById('delContactBtn');if(dc)dc.style.display='none';showAddBtns();document.querySelectorAll('[data-edit]').forEach(e=>{if(e.closest('#sheet-title') && isOpenSheet()){e.contentEditable=true;}else{e.contentEditable=false;}});if(isOpenSheet()){document.getElementById('sheet-text').contentEditable=true;}else if(currentSheet==='samparka'){document.getElementById('sheet-text').contentEditable=false;}else{document.getElementById('sheet-text').contentEditable=true;}renderPosts();}
-function handleLinkClick(e,a){if(isEditing()){e.preventDefault();return false;}return true;}
-function navGo(key){if(isEditing()){return;}if(key=='home'){goHome();return;}openSheet(key);}
-function goBack(){if(isEditing())return;closeSheet();}
+function fmt(s){const m=Math.floor(s/60),sec=s%60;return m+':'+String(sec).padStart(2,'0');}
+function fmtDateTime(value){const d=new Date(value);return d.toLocaleString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:true});}
+function navGo(key){if(isEditing())return;openSheet(key);}
 function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
-window.addEventListener('load',function(){forceNormalView();loadCornerPhoto();initCornerDrag();});
-document.addEventListener('keydown',resetPassTimerOnActivity);
-document.addEventListener('input',function(e){resetPassTimerOnActivity();if(e.target && e.target.classList && e.target.classList.contains('post-text')){savePosts();}});
-document.addEventListener('paste',function(e){let t=e.target;if(t && (t.classList.contains('full-edit')||t.classList.contains('post-text'))){e.preventDefault();let text=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,text);}});
-function loadCornerPhoto(){let d='';try{d=localStorage.getItem('corner-photo')||'';}catch(err){d='';}let img=document.getElementById('cornerPhoto');let empty=document.getElementById('cornerPhotoEmpty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='none';}
-try{let w=localStorage.getItem('corner-w');let h=localStorage.getItem('corner-h');let t=localStorage.getItem('corner-t');let l=localStorage.getItem('corner-l');let wrap=document.getElementById('cornerWrap');if(w&&h){wrap.style.width=w+'px';wrap.style.height=h+'px';}if(t&&l){wrap.style.top=t+'px';wrap.style.left=l+'px';wrap.style.right='auto';}}catch(err){}}
-function pickCornerPhoto(){if(!isEditing()){return;}let inp=document.getElementById('cornerFileInput');inp.value='';inp.click();}
-document.getElementById('cornerFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('corner-photo',d);}catch(err){}loadCornerPhoto();};r.readAsDataURL(f);e.target.value='';});
-let cornerDragging=false;let cornerResizing=false;let cornerMoved=false;let startX=0;let startY=0;let startW=0;let startH=0;let startTop=0;let startLeft=0;
-function initCornerDrag(){let wrap=document.getElementById('cornerWrap');let handle=document.getElementById('cornerDrag');
-handle.addEventListener('pointerdown',function(e){e.stopPropagation();e.preventDefault();cornerResizing=true;cornerMoved=true;startX=e.clientX;startY=e.clientY;startW=wrap.offsetWidth;startH=wrap.offsetHeight;try{handle.setPointerCapture(e.pointerId);}catch(err){}});
-wrap.addEventListener('pointerdown',function(e){if(e.target===handle)return;cornerDragging=true;cornerMoved=false;startX=e.clientX;startY=e.clientY;let r=wrap.getBoundingClientRect();startTop=r.top+window.scrollY;startLeft=r.left+window.scrollX;try{wrap.setPointerCapture(e.pointerId);}catch(err){}});
-wrap.addEventListener('pointermove',function(e){if(cornerResizing){let nw=startW+(e.clientX-startX);let nh=startH+(e.clientY-startY);nw=Math.max(80,Math.min(320,nw));nh=Math.max(100,Math.min(420,nh));wrap.style.width=nw+'px';wrap.style.height=nh+'px';cornerMoved=true;}else if(cornerDragging){let dx=e.clientX-startX;let dy=e.clientY-startY;if(Math.abs(dx)>4||Math.abs(dy)>4)cornerMoved=true;let nt=startTop+dy;let nl=startLeft+dx;nt=Math.max(60,Math.min(window.innerHeight-80,nt));nl=Math.max(0,Math.min(window.innerWidth-90,nl));wrap.style.top=nt+'px';wrap.style.left=nl+'px';wrap.style.right='auto';}});
-wrap.addEventListener('pointerup',function(e){if(cornerResizing||cornerDragging){try{localStorage.setItem('corner-w',wrap.offsetWidth);localStorage.setItem('corner-h',wrap.offsetHeight);localStorage.setItem('corner-t',parseInt(wrap.style.top)||wrap.offsetTop);localStorage.setItem('corner-l',parseInt(wrap.style.left)||wrap.offsetLeft);}catch(err){}}let wasMoved=cornerMoved;cornerDragging=false;cornerResizing=false;setTimeout(()=>{cornerMoved=false;},50);if(!wasMoved && isEditing()){pickCornerPhoto();}});
-wrap.addEventListener('click',function(e){e.stopPropagation();});}
-function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer();passCount=setInterval(updatePassTimer,1000);passTimer=setTimeout(()=>{autoLock();},PASS_LIMIT*1000);}
-function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
-function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
-function enableTotalEdit(){document.querySelectorAll('[data-edit]').forEach(e=>{e.contentEditable=true;});document.getElementById('sheet-text').contentEditable=true;showAddBtns();renderPosts();}
-async function autoLock() {
-  if (!isEditing()) return;
-
-  await saveAllSilent();
-
-  stopPassTimer();
-
-  if (window.adminLogout) {
-    await window.adminLogout();
+function goBack(){if(isEditing())return;closeSheet();}
+function closeSheet(){document.getElementById('full-page').classList.remove('open');document.body.style.overflow='';}
+function openSheet(key){
+  currentSheet=key;
+  document.getElementById('sheet-title').textContent=titles[key]||key;
+  document.getElementById('sheet-text').innerHTML=localStorage.getItem('sheet-'+key)||'';
+  const sam=key==='samparka',nim=key==='nimma';
+  document.getElementById('contact-block').style.display=sam?'block':'none';
+  document.getElementById('photoWrap').style.display=(sam||nim)?'none':'block';
+  document.getElementById('typeBtn').style.display=(sam||nim)?'none':'block';
+  document.getElementById('sheet-text').style.display=(sam||nim)?'none':'block';
+  document.getElementById('posts-area').style.display=nim?'block':'none';
+  document.getElementById('addPostBtn').style.display=nim&&isEditing()?'block':'none';
+  document.getElementById('addPostBtnBottom').style.display=nim&&isEditing()?'block':'none';
+  document.querySelector('.full-save').style.display=sam&&!isEditing()?'none':'block';
+  loadSheetPhoto();
+  if(nim)renderPosts();
+  if(sam)loadContactSettings();
+  document.getElementById('sheet-msg').textContent='';
+  document.getElementById('full-page').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function focusTyping(){if(currentSheet==='nimma')return;const el=document.getElementById('sheet-text');el.focus();}
+function getPosts(){try{const v=JSON.parse(localStorage.getItem('nimma-posts')||'[]');return Array.isArray(v)?v:[];}catch(e){return [];}}
+function setPosts(posts){localStorage.setItem('nimma-posts',JSON.stringify(posts));}
+function renderPosts(){
+  const area=document.getElementById('posts-area');area.innerHTML='';
+  const posts=getPosts();
+  posts.forEach((p,i)=>{
+    const box=document.createElement('div');box.className='post-box';box.dataset.index=i;
+    const img=document.createElement('img');img.className='post-img';img.alt='';if(p.img){img.src=p.img;img.style.display='block';}
+    const btns=document.createElement('div');btns.className='post-btns';
+    const upload=document.createElement('button');upload.className='sheet-photo-btn';upload.textContent='Upload Photo';upload.onclick=()=>pickPostPhoto(i);
+    const del=document.createElement('button');del.className='del-post-btn';del.textContent='Delete';del.onclick=()=>deletePost(i);
+    btns.append(upload,del);
+    const txt=document.createElement('div');txt.className='post-text';txt.contentEditable=isEditing()?'true':'false';txt.innerHTML=p.text||'';
+    txt.addEventListener('input',()=>{const a=getPosts();if(a[i]){a[i].text=txt.innerHTML;setPosts(a);}});
+    const date=document.createElement('div');date.className='post-date';date.textContent=fmtDateTime(p.dt);
+    box.append(img,btns,txt,date);area.appendChild(box);
+  });
+}
+function addPost(){if(!isEditing())return;const posts=getPosts();posts.push({img:'',text:'',dt:new Date().toISOString()});setPosts(posts);renderPosts();const all=document.querySelectorAll('.post-text');if(all.length)all[all.length-1].focus();}
+function deletePost(i){if(!isEditing())return;const p=getPosts();p.splice(i,1);setPosts(p);renderPosts();}
+function pickPostPhoto(i){if(!isEditing())return;currentPostIdx=i;const input=document.getElementById('postFileInput');input.value='';input.click();}
+document.getElementById('postFileInput').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f||currentPostIdx<0)return;
+  const reader=new FileReader();reader.onload=()=>{const p=getPosts();if(p[currentPostIdx]){p[currentPostIdx].img=reader.result;setPosts(p);renderPosts();}e.target.value='';};reader.readAsDataURL(f);
+});
+function loadSheetPhoto(){const data=localStorage.getItem('sheet-photo-'+currentSheet)||'';const img=document.getElementById('sheet-photo'),empty=document.getElementById('sheet-photo-empty');img.src=data;if(data){img.style.display='block';empty.style.display='none';}else{img.style.display='none';empty.style.display='block';}}
+function pickSheetPhoto(){if(!isEditing())return;const input=document.getElementById('sheetFileInput');input.value='';input.click();}
+document.getElementById('sheetFileInput').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f||!currentSheet)return;const reader=new FileReader();reader.onload=()=>{localStorage.setItem('sheet-photo-'+currentSheet,reader.result);loadSheetPhoto();e.target.value='';};reader.readAsDataURL(f);
+});
+function loadContactSettings(){
+  const pairs=[['waInput','waLink'],['webInput1','webLink1'],['webInput2','webLink2']];
+  pairs.forEach(([input,link])=>{const v=localStorage.getItem('contact-'+input);if(v){document.getElementById(input).value=v;document.getElementById(link).href=v;}});
+  const mail=localStorage.getItem('contact-mail')||'ashram@gururamana.org';
+  document.getElementById('mailInput').value=mail;document.getElementById('mailText').textContent=mail;updateGmail();
+}
+function updateGmail(){const mail=document.getElementById('mailInput').value.trim();document.getElementById('mailText').textContent=mail;document.getElementById('gmailLink').href='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(mail)+'&su=Guest%20House%20Booking';}
+[['waInput','waLink'],['webInput1','webLink1'],['webInput2','webLink2']].forEach(([input,link])=>{
+  document.getElementById(input).addEventListener('input',e=>{document.getElementById(link).href=e.target.value;});
+});
+document.getElementById('mailInput').addEventListener('input',updateGmail);
+function collectCloudData(){
+  const keys=['nimma-posts','sheet-nimma','sheet-photo-nimma','sheet-photo-bodhane','corner-photo','contact-waInput','contact-webInput1','contact-webInput2','contact-mail'];
+  const items={};
+  keys.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)items[k]=v;});
+  if(currentSheet&&currentSheet!=='samparka')items['sheet-'+currentSheet]=document.getElementById('sheet-text').innerHTML;
+  if(currentSheet==='samparka'){
+    items['contact-waInput']=document.getElementById('waInput').value;
+    items['contact-webInput1']=document.getElementById('webInput1').value;
+    items['contact-webInput2']=document.getElementById('webInput2').value;
+    items['contact-mail']=document.getElementById('mailInput').value;
   }
+  return {items};
 }
-function updateGmail(){if(!isEditing())return;let m=document.getElementById('mailInput').value.trim();document.getElementById('gmailLink').href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(m)+"&su=Guest%20House%20Booking";}
-function copyFullCode(){let was=isEditing();forceNormalView();let code="<!DOCTYPE html>\n"+document.documentElement.outerHTML;navigator.clipboard.writeText(code);document.getElementById('sheet-msg').innerText='✅ Code Copy ಆಯ್ತು';if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
-function deleteContact(){if(isEditing()){document.getElementById('contact-block').innerHTML='<p style="text-align:center;color:#F5D67A;padding:20px">ಸಂಪರ್ಕ ಬಾಕ್ಸ್ ತೆಗೆಯಲಾಗಿದೆ.</p>';saveSheet();}}
-function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();let r=document.createRange();r.selectNodeContents(el);r.collapse(false);let s=window.getSelection();s.removeAllRanges();s.addRange(r);el.scrollIntoView({behavior:'smooth',block:'center'});}
-function getPosts(){try{let a=JSON.parse(localStorage.getItem('nimma-posts')||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
-function savePosts(){let posts=[];document.querySelectorAll('.post-box').forEach(function(box){posts.push({img:box.querySelector('.post-img').src||'',text:box.querySelector('.post-text').innerHTML||'',dt:box.dataset.dt||new Date().toISOString()});});try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}}
-function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){posts=[{img:'',text:'',dt:new Date().toISOString()}];try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}}
-area.innerHTML='';posts.forEach(function(p,i){let div=document.createElement('div');div.className='post-box';div.dataset.dt=p.dt;
-div.innerHTML='<img class="post-img" src="'+(p.img||'')+'" style="display:'+(p.img?'block':'none')+'"><div class="post-btns"><button class="sheet-photo-btn" type="button" onclick="pickPostPhoto('+i+')">Upload Photo</button> <button class="del-post-btn" type="button" onclick="deletePost('+i+')">Delete</button></div><div class="post-text" contenteditable="true">'+(p.text||'')+'</div><div class="post-date">'+fmtDateTime(p.dt)+'</div>';
-area.appendChild(div);});}
-function addPost(){let posts=getPosts();posts.push({img:'',text:'',dt:new Date().toISOString()});try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}renderPosts();setTimeout(function(){let els=document.querySelectorAll('.post-box');if(els.length)els[els.length-1].scrollIntoView({behavior:'smooth',block:'start'});let txts=document.querySelectorAll('.post-text');if(txts.length)txts[txts.length-1].focus();},100);}
-function deletePost(i){if(!isEditing())return;let posts=getPosts();posts.splice(i,1);try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}renderPosts();}
-function pickPostPhoto(i){currentPostIdx=i;if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('postFileInput');inp.value='';inp.click();}
-document.getElementById('postFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||currentPostIdx<0)return;let r=new FileReader();r.onload=function(ev){let posts=getPosts();if(posts[currentPostIdx]){posts[currentPostIdx].img=ev.target.result;try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(err){}renderPosts();}};r.readAsDataURL(f);e.target.value='';});
-function openSheet(key){currentSheet=key;try{let t=localStorage.getItem('sheet-title-'+key)||titles[key]||key;let st=document.querySelector('#sheet-title [data-edit]');if(st)st.innerText=t;else document.getElementById('sheet-title').innerText=t;}catch(err){document.getElementById('sheet-title').innerText=titles[key]||key;}let s='';try{s=localStorage.getItem('sheet-'+key)||'';}catch(err){s='';}document.getElementById('sheet-text').innerHTML=s;let open=isOpenSheet(key);document.getElementById('sheet-text').contentEditable=open;let titleEl=document.querySelector('#sheet-title [data-edit]');if(titleEl)titleEl.contentEditable=open||isEditing();document.getElementById('sheet-msg').innerHTML='';let isSam=key=='samparka';let isNimma=key=='nimma';document.getElementById('contact-block').style.display=isSam?'block':'none';document.getElementById('photoWrap').style.display=(isSam||isNimma)?'none':'block';document.getElementById('typeBtn').style.display=(isSam||isNimma)?'none':'block';document.getElementById('sheet-text').style.display=(isSam||isNimma)?'none':'block';document.getElementById('posts-area').style.display=isNimma?'block':'none';showAddBtns();if(isNimma)renderPosts();let saveBtn=document.querySelector('.full-save');if(saveBtn)saveBtn.style.display=isSam&&!isEditing()?'none':'block';loadSheetPhoto();let fp=document.getElementById('full-page');fp.classList.add('open');fp.style.display='flex';document.body.style.overflow='hidden';fp.scrollTop=0;}
-function closeSheet(){let fp=document.getElementById('full-page');fp.classList.remove('open');fp.style.display='none';document.body.style.overflow='';}
-function saveSheet(){if(currentSheet==='nimma'){savePosts();document.getElementById('sheet-msg').innerHTML='✅ save ಆಯ್ತು';return;}if(currentSheet==='samparka'&&!isEditing())return;try{localStorage.setItem('sheet-'+currentSheet,document.getElementById('sheet-text').innerHTML);let st=document.querySelector('#sheet-title [data-edit]');localStorage.setItem('sheet-title-'+currentSheet,st?st.innerText:document.getElementById('sheet-title').innerText);if(isEditing())localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}document.getElementById('sheet-msg').innerHTML='✅ save ಆಯ್ತು';}
-function loadSheetPhoto(){let d='';try{d=localStorage.getItem('sheet-photo-'+currentSheet)||'';}catch(err){d='';}let img=document.getElementById('sheet-photo');let empty=document.getElementById('sheet-photo-empty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='block';}}
-function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
-document.getElementById('sheetFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||!currentSheet)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('sheet-photo-'+currentSheet,d);}catch(err){}loadSheetPhoto();};r.readAsDataURL(f);e.target.value='';});
-function removeSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;if(!currentSheet)return;try{localStorage.removeItem('sheet-photo-'+currentSheet);}catch(err){}loadSheetPhoto();if(isOpenSheet())pickSheetPhoto();}
-  async function askPassword() {
-  if (isEditing()) return;
-
-  const email = prompt("Admin Email:");
-  if (!email) return;
-
-  const password = prompt("Admin Password:");
-  if (!password) return;
-
-  try {
-    await window.adminLogin(email, password);
-  } catch (error) {
-    alert("Login Failed: " + error.message);
-  }
+function applyCloudData(items){
+  if(!items)return;
+  Object.entries(items).forEach(([k,v])=>{try{localStorage.setItem(k,typeof v==='string'?v:JSON.stringify(v));}catch(e){}});
+  if(currentSheet==='nimma')renderPosts();
+  if(currentSheet==='samparka')loadContactSettings();
+  if(currentSheet)loadSheetPhoto();
 }
-if (!window.isAdminAuthenticated) return false;
-
-try {
-  savePosts();
-
-  if (currentSheet) {
-    saveSheet();
-  }
-
-  const data = collectCloudData();
-
-  await window.saveToFirestore(data);
-
-  return true;
-} catch (error) {
-  console.error("Auto save error:", error);
-  return false;
-}
-}
-
-  try {
-    savePosts();
-
-    if (currentSheet) {
-      saveSheet();
-    }
-
-    const data = collectCloudData();
-
-    await window.saveToFirestore(data);
-
-    document.getElementById("sheet-msg").innerText =
-      "✅ Firebase Cloud Save ಯಶಸ್ವಿಯಾಗಿದೆ";
-
-    return true;
-
-  } catch (error) {
-    console.error(error);
-    alert("Cloud Save Error: " + error.message);
-    return false;
-  }
-}
-  let was=isEditing();
-  savePosts();
-  forceNormalView();
+async function saveAll(){
   try{
-    localStorage.setItem('one-sheet-save',document.body.innerHTML);
-    localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);
-    
-    // ಫೈರ್‌ಬೇಸ್‌ಗೆ ಡೇಟಾ ಕಳುಹಿಸಲು ಈ ಕಾರ್ಯವನ್ನು ಬಳಸಿ:
-    if(typeof saveToFirestore==='function'){saveToFirestore(document.body.innerHTML);}
-    
-  }catch(err){}
-  
-  if(was){
-    document.body.classList.add('editing');
-    document.getElementById('edit-bar').style.display='block';
-    document.getElementById('float-save').style.display='block';
-    enableTotalEdit();
-  }
+    if(currentSheet==='nimma'){
+      const p=getPosts();document.querySelectorAll('.post-box').forEach((box,i)=>{const t=box.querySelector('.post-text');if(p[i]&&t)p[i].text=t.innerHTML;});setPosts(p);
+    } else if(currentSheet&&currentSheet!=='samparka'){
+      localStorage.setItem('sheet-'+currentSheet,document.getElementById('sheet-text').innerHTML);
+    }
+    if(currentSheet==='samparka'){
+      localStorage.setItem('contact-waInput',document.getElementById('waInput').value);
+      localStorage.setItem('contact-webInput1',document.getElementById('webInput1').value);
+      localStorage.setItem('contact-webInput2',document.getElementById('webInput2').value);
+      localStorage.setItem('contact-mail',document.getElementById('mailInput').value);
+    }
+    const data=collectCloudData();
+    if(window.isAdminAuthenticated&&window.saveToFirestore){await window.saveToFirestore(data);document.getElementById('sheet-msg').textContent='✅ Firebase Cloud Save ಯಶಸ್ವಿಯಾಗಿದೆ';}
+    else{document.getElementById('sheet-msg').textContent='✅ ಈ ಸಾಧನದಲ್ಲಿ Save ಆಯಿತು. Cloud Save ಗೆ Admin Login ಅಗತ್ಯ.';}
+  }catch(err){console.error(err);document.getElementById('sheet-msg').textContent='Save Error: '+err.message;}
 }
-document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
-forceNormalView();loadCornerPhoto();initCornerDrag();
+function startPassTimer(){
+  clearTimeout(passTimer);clearInterval(passCount);passStart=Date.now();
+  const tick=()=>{const left=Math.max(0,PASS_LIMIT-Math.floor((Date.now()-passStart)/1000));document.getElementById('idle-info').textContent=fmt(left);};
+  tick();passCount=setInterval(tick,1000);passTimer=setTimeout(()=>exitEdit(),PASS_LIMIT*1000);
+}
+function enableEditing(){
+  document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';
+  document.querySelectorAll('[data-edit]').forEach(el=>el.contentEditable='true');
+  document.getElementById('sheet-text').contentEditable=currentSheet!=='samparka';
+  if(currentSheet==='nimma'){document.getElementById('addPostBtn').style.display='block';document.getElementById('addPostBtnBottom').style.display='block';renderPosts();}
+  startPassTimer();
+}
+function disableEditing(){
+  document.body.classList.remove('editing');document.getElementById('edit-bar').style.display='none';document.getElementById('float-save').style.display='none';
+  document.querySelectorAll('[data-edit]').forEach(el=>el.contentEditable='false');
+  document.getElementById('sheet-text').contentEditable=false;
+  document.getElementById('addPostBtn').style.display='none';document.getElementById('addPostBtnBottom').style.display='none';
+  clearTimeout(passTimer);clearInterval(passCount);
+  if(currentSheet==='nimma')renderPosts();
+}
+async function exitEdit(){if(!isEditing())return;await saveAll();disableEditing();if(window.adminLogout)try{await window.adminLogout();}catch(e){console.warn(e);}}
+async function askPassword(){
+  if(isEditing())return;
+  const email=prompt('Admin Email:');if(!email)return;
+  const password=prompt('Admin Password:');if(!password)return;
+  try{if(!window.adminLogin)throw new Error('Firebase ಇನ್ನೂ ಲೋಡ್ ಆಗಿಲ್ಲ. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪ್ರಯತ್ನಿಸಿ.');await window.adminLogin(email,password);enableEditing();}
+  catch(error){alert('Login Failed: '+error.message);}
+}
+document.addEventListener('keydown',()=>{if(isEditing())startPassTimer();});
+document.addEventListener('input',()=>{if(isEditing())startPassTimer();});
+window.addEventListener('load',async()=>{
+  if(window.loadFromFirestore){try{const cloud=await window.loadFromFirestore();if(cloud)applyCloudData(cloud);}catch(e){console.error('Cloud loading error:',e);}}
+});
 </script>
 
 <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-storage.js";
 
-mport { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-
-serverTimestamp
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
-
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  setPersistence,
-  browserSessionPersistence
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
-
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-storage.js";
 const firebaseConfig = {
   apiKey: "AIzaSyAGszJqyb1Vqnn9LQRtyZKBe6oK9_2Ga-w",
   authDomain: "ramana-website.firebaseapp.com",
@@ -305,154 +301,53 @@ const firebaseConfig = {
   appId: "1:1070413104086:web:f85473281477903bcd9a77"
 };
 
-const app = initializeApp(firebaseConfig);
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const auth=getAuth(app);
+const storage=getStorage(app);
+const ADMIN_EMAIL="sunilvodaidea@gmail.com";
 
-const db = getFirestore(app);
-const auth = getAuth(app);
-const storage = getStorage(app);
+await setPersistence(auth,browserSessionPersistence);
 
-const ADMIN_EMAIL = "sunilvodaidea@gmail.com";
-
-await setPersistence(auth, browserSessionPersistence);
-
-
-window.adminLogin = \sync function(email, password) {
-
-  if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
-    throw new Error("Admin email ಮಾತ್ರ ಅನುಮತಿ ಇದೆ");
-  }
-
-  const result = await signInWithEmailAndPassword(
-    auth, email.trim(), password
-  );
-
-  if (result.user.email !== ADMIN_EMAIL) {
-    await signOut(auth);
-    throw new Error("Admin access denied");
-  }
-
+window.adminLogin=async function(email,password){
+  if(email.trim().toLowerCase()!==ADMIN_EMAIL)throw new Error('ಈ Admin Email ಗೆ ಮಾತ್ರ ಅನುಮತಿ ಇದೆ.');
+  const result=await signInWithEmailAndPassword(auth,email.trim(),password);
+  if((result.user.email||'').toLowerCase()!==ADMIN_EMAIL){await signOut(auth);throw new Error('Admin access denied');}
+  window.isAdminAuthenticated=true;
   return true;
 };
+window.adminLogout=async function(){await signOut(auth);window.isAdminAuthenticated=false;};
 
-
-window.adminLogout = sync function() {
-  await signOut(auth);
-};
-
-
-sync function uploadImage(data, path) {
-
-  if (!data || !data.startsWith("data:")) {
-    return data;
-  }
-
-  const blob = await (await fetch(data)).blob();
-
-  const fileRef = ref(storage, path);
-
-  await uploadBytes(fileRef, blob);
-
+async function uploadImage(data,path){
+  if(typeof data!=='string'||!data.startsWith('data:'))return data;
+  const response=await fetch(data);
+  const blob=await response.blob();
+  const fileRef=ref(storage,path);
+  await uploadBytes(fileRef,blob);
   return await getDownloadURL(fileRef);
 }
-
-
-window.saveToFirestore = async function(snapshot) {
-
-  if (!auth.currentUser ||
-      auth.currentUser.email !== ADMIN_EMAIL) {
-    throw new Error("Admin login required");
+window.saveToFirestore=async function(snapshot){
+  if(!auth.currentUser||(auth.currentUser.email||'').toLowerCase()!==ADMIN_EMAIL)throw new Error('Admin login required');
+  const items={...(snapshot.items||{})};
+  if(items['corner-photo'])items['corner-photo']=await uploadImage(items['corner-photo'],'website/corner-photo');
+  for(const key of Object.keys(items)){
+    if(key.startsWith('sheet-photo-'))items[key]=await uploadImage(items[key],'website/'+key);
   }
-
-  const items = {...snapshot.items};
-
-  for (const key of Object.keys(items)) {
-
-    if (
-      key === "corner-photo" ||
-      key.startsWith("sheet-photo-")
-    ) {
-      items[key] = await uploadImage(
-        items[key],
-        "website/" + key
-      );
-    }
+  if(items['nimma-posts']){
+    const posts=JSON.parse(items['nimma-posts']);
+    for(let i=0;i<posts.length;i++)if(posts[i].img)posts[i].img=await uploadImage(posts[i].img,'website/posts/post-'+i+'-'+Date.now());
+    items['nimma-posts']=JSON.stringify(posts);
   }
-
-  if (items["nimma-posts"]) {
-
-    const posts = JSON.parse(items["nimma-posts"]);
-
-    for (let i = 0; i < posts.length; i++) {
-
-      if (posts[i].img && posts[i].img.startsWith("data:")) {
-
-        posts[i].img = await uploadImage(
-          posts[i].img,
-          "website/posts/post-" + i + "-" + Date.now()
-        );
-      }
-    }
-
-    items["nimma-posts"] = JSON.stringify(posts);
-  }
-
-  await setDoc(
-    doc(db, "pages", "mainContent"),
-    {
-      items: items,
-      updatedAt: serverTimestamp()
-    }
-  );
-
-  return {items};
+  await setDoc(doc(db,'pages','mainContent'),{items,updatedAt:serverTimestamp()});
+  return true;
 };
-
-
-window.loadFromFirestore = async function() {
-
-  const snap = await getDoc(
-    doc(db, "pages", "mainContent")
-  );
-
-  if (!snap.exists()) return null;
-
-  return snap.data().items || null;
+window.loadFromFirestore=async function(){
+  const snap=await getDoc(doc(db,'pages','mainContent'));
+  return snap.exists()?(snap.data().items||null):null;
 };
-
-
-onAuthStateChanged(auth, user => {
-
-  window.isAdminAuthenticated =
-    !!user && user.email === ADMIN_EMAIL;
-
-  if (window.isAdminAuthenticated) {
-
-    if (window.activateAdminEditing) {
-      window.activateAdminEditing();
-    }
-
-  } else {
-
-    if (window.deactivateAdminEditing) {
-      window.deactivateAdminEditing();
-    }
-  }
-
+onAuthStateChanged(auth,user=>{
+  window.isAdminAuthenticated=!!user&&(user.email||'').toLowerCase()===ADMIN_EMAIL;
 });
-
-
-try {
-
-  const items = await window.loadFromFirestore();
-
-  if (items && window.applyCloudData) {
-    window.applyCloudData(items);
-  }
-
-} catch (error) {
-
-  console.error("Cloud loading error:", error);
-
-}
-
 </script>
+</body>
+</html>
