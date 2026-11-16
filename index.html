@@ -217,6 +217,8 @@ forceNormalView();loadCornerPhoto();
   </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyBsHc-KypMVu0ghhy7IhBotZD6dZjqtoq",
@@ -228,15 +230,21 @@ forceNormalView();loadCornerPhoto();
   };
   if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   async function askPassword(){
-    let p = prompt("Admin Password ಹಾಕಿ ದೊರೆ:");
+    let p = prompt("Admin Password ಹಾಕಿ :");
     if(!p) return;
     try{
       await firebase.auth().signInWithEmailAndPassword("sunilvodaidea@gmail.com", p);
-      document.getElementById('edit-bar').style.display='block';
-      document.getElementById('float-save').style.display='block';
-      enableTotalEdit();
-      alert("Welcome ದೊರೆ! Edit Open ಆಯ್ತು");
-    } catch(e){ alert("Wrong Password ದೊರೆ!"); }
+    } catch(e){
+      alert("Login Error: " + e.code + " - " + e.message);
+      return;
+    }
+    alert("Login Success ! ಈಗ Edit Open ");
+    let bar = document.getElementById('edit-bar');
+    if(bar) bar.style.display='block'; else alert("edit-bar ID ");
+    let fs = document.getElementById('float-save');
+    if(fs) fs.style.display='block'; else alert("float-save ID ");
+    if(typeof enableTotalEdit === 'function'){ enableTotalEdit(); }
+  else { alert("enableTotalEdit Function !"); }
   }
-</script>  
+</script>
 </html>
