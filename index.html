@@ -187,7 +187,7 @@ function deleteContact(){if(isEditing()){document.getElementById('contact-block'
 function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();let r=document.createRange();r.selectNodeContents(el);r.collapse(false);let s=window.getSelection();s.removeAllRanges();s.addRange(r);el.scrollIntoView({behavior:'smooth',block:'center'});}
 let cachedPosts = [];
 function getPosts(){ return cachedPosts; }
-function savePosts(){...}
+function savePosts(){try{localStorage.setItem('posts',JSON.stringify(posts));}catch(e){}}
 function savePostsDirect(posts){... db.collection...}
 db.collection('site').doc('nimma-posts').onSnapshot..
 function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){posts=[{img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]}];savePostsDirect(posts);}
