@@ -152,13 +152,14 @@ function handleLinkClick(e,a){if(isEditing()){e.preventDefault();return false;}r
 function navGo(key){if(isEditing()){return;}if(key=='home'){goHome();return;}openSheet(key);}
 function goBack(){if(isEditing())return;closeSheet();}
 function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
-window.addEventListener('load',function(){forceNormalView();loadCornerPhoto();});
-document.addEventListener('keydown',resetPassTimerOnActivity);
-document.addEventListener('input',function(e){resetPassTimerOnActivity();if(e.target && e.target.classList && e.target.classList.contains('post-text')){savePosts();}});
-document.addEventListener('paste',function(e){let t=e.target;if(t && (t.classList.contains('full-edit')||t.classList.contains('post-text'))){e.preventDefault();let text=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,text);}});
-function loadCornerPhoto(){let d='';try{d=localStorage.getItem('corner-photo')||'';}catch(err){d='';}let img=document.getElementById('cornerPhoto');let empty=document.getElementById('cornerPhotoEmpty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='flex';}}
-function pickCornerPhoto(){if(!isEditing()){return;}let inp=document.getElementById('cornerFileInput');inp.value='';inp.click();}
-document.getElementById('cornerFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('corner-photo',d);}catch(err){}loadCornerPhoto();};r.readAsDataURL(f);e.target.value='';});
+window.addEventListener('load',function(){forceNormalView();loadCorne...
+ document.addEventListener('keydown',resetPassTimerOnActivity);
+document.addEventListener('input',function(e){resetPassTimerOnActivity...
+document.addEventListener('paste',function(e){let t=e.target;if(t && (...
+function loadCornerPhoto(){...
+function pickCornerPhoto(){...
+document.getElementById('cornerFileInput').addEventListener('change',f...
+function startPassTimer(){...
 function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer();passCount=setInterval(updatePassTimer,1000);passTimer=setTimeout(()=>{autoLock();},PASS_LIMIT*1000);}
 function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
 function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
@@ -192,7 +193,7 @@ function loadSheetPhoto(){let d='';try{d=localStorage.getItem('sheet-photo-'+cur
 function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
 document.getElementById('sheetFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||!currentSheet)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('sheet-photo-'+currentSheet,d);}catch(err){}loadSheetPhoto();};r.readAsDataURL(f);e.target.value='';});
 function exitEdit(){stopPassTimer();forceNormalView();saveAll();if(currentSheet==='samparka'){let sb=document.querySelector('.full-save');if(sb)sb.style.display='none';}}
-  function askPassword(){if(isEditing()){return;}let em=prompt("Email:");let pw=prompt("Password:");if(!em||!pw)return;firebase.auth().signInWithEmailAndPassword(em,pw).then(()=>{document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();document.getElementById('delContactBtn').style.display='inline-block';showAddBtns();let sb=document.querySelector('.full-save');if(sb)sb.style.display='block';startPassTimer();}).catch(()=>alert("Wrong Email / Password"));}
+  (){if(isEditing()){return;}let em=prompt("Email:");let pw=prompt("Password:");if(!em||!pw)return;firebase.auth().signInWithEmailAndPassword(em,pw).then(()=>{document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();document.getElementById('delContactBtn').style.display='inline-block';showAddBtns();let sb=document.querySelector('.full-save');if(sb)sb.style.display='block';startPassTimer();}).catch(()=>alert("Wrong Email / Password"));}
 function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
