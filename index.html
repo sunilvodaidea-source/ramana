@@ -159,7 +159,7 @@ document.addEventListener('paste',function(e){let t=e.target;if(t && (...
 function loadCornerPhoto(){...
 function pickCornerPhoto(){...
 document.getElementById('cornerFileInput').addEventListener('change',f...
-function startPassTimer(){...
+
 function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer();passCount=setInterval(updatePassTimer,1000);passTimer=setTimeout(()=>{autoLock();},PASS_LIMIT*1000);}
 function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
 function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
@@ -191,28 +191,13 @@ function closeSheet(){let fp=document.getElementById('full-page');fp.classList.r
 function saveSheet(){if(currentSheet==='nimma'){savePosts();document.getElementById('sheet-msg').innerHTML='Saved';return;}if(currentSheet==='samparka'&&!isEditing())return;try{localStorage.setItem('sheet-'+currentSheet,document.getElementById('sheet-text').innerHTML);let st=document.querySelector('#sheet-title [data-edit]');localStorage.setItem('sheet-title-'+currentSheet,st?st.innerText:document.getElementById('sheet-title').innerText);if(isEditing())localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}document.getElementById('sheet-msg').innerHTML='Saved';}
 function loadSheetPhoto(){let d='';try{d=localStorage.getItem('sheet-photo-'+currentSheet)||'';}catch(err){d='';}let img=document.getElementById('sheet-photo');let empty=document.getElementById('sheet-photo-empty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='block';}}
 function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
-document.getElementById('sheetFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||!currentSheet)return;let r=new FileReader();r.onload=function(ev){let d=ev.target.result;try{localStorage.setItem('sheet-photo-'+currentSheet,d);}catch(err){}loadSheetPhoto();};r.readAsDataURL(f);e.target.value='';});
-function exitEdit(){stopPassTimer();forceNormalView();saveAll();if(currentSheet==='samparka'){let sb=document.querySelector('.full-save');if(sb)sb.style.display='none';}}
-  (){if(isEditing()){return;}let em=prompt("Email:");let pw=prompt("Password:");if(!em||!pw)return;firebase.auth().signInWithEmailAndPassword(em,pw).then(()=>{document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();document.getElementById('delContactBtn').style.display='inline-block';showAddBtns();let sb=document.querySelector('.full-save');if(sb)sb.style.display='block';startPassTimer();}).catch(()=>alert("Wrong Email / Password"));}
-function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
+...addEventListener('change',
+function(){if(isEditing()){return;}
+  function exitEdit(){...
+  function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();
   </script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-<script>
-var firebaseConfig = {
-  apiKey: "AIzaSyBsHc-KypMv0uOghhy71hBotZD6dZjqtog",
-  authDomain: "sri-ramana-kannada-website.firebaseapp.com",
-  projectId: "sri-ramana-kannada-website",
-  storageBucket: "sri-ramana-kannada-website.firebasestorage.app",
-  messagingSenderId: "200509926521",
-  appId: "1:200509926521:web:920cbeb9eecd0ba65a78a8"
-};
-firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
-</script>
-</body>
+  
 </html>
