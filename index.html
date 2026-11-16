@@ -282,12 +282,17 @@ function startPassTimer(){
   const tick=()=>{const left=Math.max(0,PASS_LIMIT-Math.floor((Date.now()-passStart)/1000));document.getElementById('idle-info').textContent=fmt(left);};
   tick();passCount=setInterval(tick,1000);passTimer=setTimeout(()=>exitEdit(),PASS_LIMIT*1000);
 }
-function enableEditing(){
-  document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';
-  document.querySelectorAll('[data-edit]').forEach(el=>el.contentEditable='true');
-  document.getElementById('sheet-text').contentEditable=currentSheet!=='samparka';
-  if(currentSheet==='nimma'){document.getElementById('addPostBtn').style.display='block';document.getElementById('addPostBtnBottom').style.display='block';renderPosts();}
-  startPassTimer();
+if(currentSheet==='nimma'){
+    document.getElementById('addPostBtn').style.display='block';
+    document.getElementById('addPostBtnBottom').style.display='block';
+
+    const topBtn=document.getElementById('addPostBtn');
+    const bottomBtn=document.getElementById('addPostBtnBottom');
+
+    topBtn.hidden=false;
+    bottomBtn.hidden=false;
+
+    renderPosts();
 }
 function disableEditing(){
   document.body.classList.remove('editing');document.getElementById('edit-bar').style.display='none';document.getElementById('float-save').style.display='none';
