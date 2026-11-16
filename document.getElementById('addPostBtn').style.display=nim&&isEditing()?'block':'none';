@@ -112,7 +112,12 @@ body.editing .del-post-btn{display:inline-block}
     <div><button class="edit-inside-btn" type="button" onclick="askPassword()">✏️ ತಿದ್ದು</button> <button class="back-btn" type="button" onclick="goBack()">← ಹಿಂದೆ</button></div>
   </div>
   <div class="full-title"><h1 id="sheet-title">ನಿಮ್ಮ ಪೋಸ್ಟ್</h1><p>✦</p></div>
-  <button id="addPostBtn" class="add-post-btn" type="button" onclick="addPost()">+ ಹೊಸ ಪೋಸ್ಟ್ ಸೇರಿಸಿ</button>
+ <button id="addPostBtn"
+class="add-post-btn"
+type="button"
+onclick="addPost()">
+➕ Add Page
+</button>
   <div id="posts-area"></div>
   <div id="photoWrap" class="sheet-photo-wrap">
     <img id="sheet-photo" src="" alt="">
