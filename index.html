@@ -245,5 +245,19 @@ forceNormalView();loadCornerPhoto();
     if(typeof enableTotalEdit === 'function'){ enableTotalEdit(); }
   else { alert("enableTotalEdit Function !"); }
   }
+  async function googleLogin(){
+  try{
+    var provider = new firebase.auth.GoogleAuthProvider();
+    await firebase.auth().signInWithPopup(provider);
+    alert("Login Success ! Edit Open ");
+    let bar = document.getElementById('edit-bar');
+    if(bar) bar.style.display='block';
+    let fs = document.getElementById('float-save');
+    if(fs) fs.style.display='block';
+    if(typeof enableTotalEdit === 'function'){ enableTotalEdit(); }
+  } catch(e){
+    alert("Login Error: " + e.message);
+  }
+}
 </script>
 </html>
