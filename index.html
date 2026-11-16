@@ -191,7 +191,9 @@ function renderPosts(){
   });
 }
   function addPost(){
-    if(!isEditing()) return;
+
+    const posts = getPosts();
+    
 
     const posts = getPosts();
 
