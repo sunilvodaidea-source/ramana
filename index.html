@@ -207,17 +207,32 @@ function renderPosts(){
     box.append(img,btns,txt,date);area.appendChild(box);
   });
 }
-  function addPost(){
-    if(!isEditing()) return;
+  function addPost() {
+    if (!isEditing()) return;
 
-    const posts=getPosts();
+    const posts = getPosts();
 
     posts.push({
-        img:'',
-        text:'<h2>📄 ಹೊಸ ಪುಟ</h2><p>ಇಲ್ಲಿ ನಿಮ್ಮ ಬರಹ ಪ್ರಾರಂಭಿಸಿ...</p>',
-        dt:new Date().toISOString()
+        img: '',
+        text: '',
+        dt: new Date().toISOString()
     });
 
+    setPosts(posts);
+    renderPosts();
+
+    setTimeout(() => {
+        const all = document.querySelectorAll('.post-box');
+
+        if (all.length) {
+            all[all.length - 1].scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    }, 100);
+
+    saveAll();
+}
     setPosts(posts);
     renderPosts();
 
