@@ -152,14 +152,30 @@ function handleLinkClick(e,a){if(isEditing()){e.preventDefault();return false;}r
 function navGo(key){if(isEditing()){return;}if(key=='home'){goHome();return;}openSheet(key);}
 function goBack(){if(isEditing())return;closeSheet();}
 function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
-window.addEventListener('load',function(){forceNormalView();loadCorne...
- document.addEventListener('keydown',resetPassTimerOnActivity);
+window.addEventListener('load',function(){forceNormalView();loadCor
+ nerPhoto();});
 document.addEventListener('input',function(e){resetPassTimerOnActivity...
 document.addEventListener('paste',function(e){let t=e.target;if(t && (...
-function loadCornerPhoto(){...
-function pickCornerPhoto(){...
-document.getElementById('cornerFileInput').addEventListener('change',f...
-
+function loadCornerPhoto(){
+  let p = localStorage.getItem('cornerPhoto');
+  if(p){
+    let img = document.getElementById('cornerPhoto');
+    if(img) img.src = p;
+  }
+}
+function pickCornerPhoto(){
+  document.getElementById('cornerFileInput').click();
+}
+document.getElementById('cornerFileInput').addEventListener('change', function(e){
+  let f = e.target.files[0];
+  if(!f) return;
+  let r = new FileReader();
+  r.onload = function(){
+    localStorage.setItem('cornerPhoto', r.result);
+    loadCornerPhoto();
+  };
+  r.readAsDataURL(f);
+});
 function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer();passCount=setInterval(updatePassTimer,1000);passTimer=setTimeout(()=>{autoLock();},PASS_LIMIT*1000);}
 function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
 function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
