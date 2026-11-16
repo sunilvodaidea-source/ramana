@@ -154,7 +154,7 @@ function goBack(){if(isEditing())return;closeSheet();}
 function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
 window.addEventListener('load',function(){forceNormalView();loadCor
  nerPhoto();});
-document.addEventListener('input',function(e){resetPassTimerOnActivity...
+document.addEventListener('input',function(e){resetPassTimerOnActivity();});
 document.addEventListener('paste',function(e){let t=e.target;if(t && (...
 function loadCornerPhoto(){
   let p = localStorage.getItem('cornerPhoto');
