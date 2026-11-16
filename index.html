@@ -207,7 +207,7 @@ function closeSheet(){let fp=document.getElementById('full-page');fp.classList.r
 function saveSheet(){if(currentSheet==='nimma'){savePosts();document.getElementById('sheet-msg').innerHTML='Saved';return;}if(currentSheet==='samparka'&&!isEditing())return;try{localStorage.setItem('sheet-'+currentSheet,document.getElementById('sheet-text').innerHTML);let st=document.querySelector('#sheet-title [data-edit]');localStorage.setItem('sheet-title-'+currentSheet,st?st.innerText:document.getElementById('sheet-title').innerText);if(isEditing())localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}document.getElementById('sheet-msg').innerHTML='Saved';}
 function loadSheetPhoto(){let d='';try{d=localStorage.getItem('sheet-photo-'+currentSheet)||'';}catch(err){d='';}let img=document.getElementById('sheet-photo');let empty=document.getElementById('sheet-photo-empty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='block';}}
 function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
-...addEventListener('change',
+document.getElementById('sheetFileInput').addEventListener('change',
 function(){if(isEditing()){return;}
   function exitEdit(){...
   function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
