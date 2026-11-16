@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</title>
-<meta name="google-site-verification" content="wNHMqXp8xwPn7k52dipLFHos_0IzrGymNZXzlTu3cfs">dex
+<meta name="google-site-verification" content="wNHMqXp8xwPn7k52dipLFHos_0IzrGymNZXzlTu3cfs">
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0A2A5E;color:#fff;font-family:Arial,sans-serif;text-align:center;overflow-x:hidden}
@@ -60,19 +60,7 @@ body.editing #edit-indicator{display:inline-block}
 .post-box .post-text{padding:18px;font-size:19px;line-height:1.9;outline:none;min-height:100px;color:#fff;background:#0A2A5E}
 .post-box .post-text:empty:before{content:"ಇಲ್ಲಿ ಬರೆಯಿರಿ...";color:#9AB0D6}
 .post-date{padding:0 18px 16px;color:#F5D67A;font-size:14px;text-align:right}
-.add-post-btn,.add-post-btn-bottom{
-display:block;
-width:calc(100% - 40px);
-margin:10px 20px;
-background:#FFD700;
-color:#000;
-border:0;
-padding:14px;
-border-radius:20px;
-font-weight:bold;
-font-size:16px;
-cursor:pointer;
-}
+.add-post-btn,.add-post-btn-bottom{display:none;width:calc(100% - 40px);margin:10px 20px;background:#FFD700;color:#000;border:0;padding:14px;border-radius:20px;font-weight:bold;font-size:16px;cursor:pointer}
 .del-post-btn{background:#ff4444;color:#fff;border:0;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
 body.editing .del-post-btn{display:inline-block}
 #sheet-msg{color:#90FF90}
@@ -112,12 +100,7 @@ body.editing .del-post-btn{display:inline-block}
     <div><button class="edit-inside-btn" type="button" onclick="askPassword()">✏️ ತಿದ್ದು</button> <button class="back-btn" type="button" onclick="goBack()">← ಹಿಂದೆ</button></div>
   </div>
   <div class="full-title"><h1 id="sheet-title">ನಿಮ್ಮ ಪೋಸ್ಟ್</h1><p>✦</p></div>
- <button id="addPostBtn"
-class="add-post-btn"
-type="button"
-onclick="addPost()">
-➕ Add Page
-</button>
+  <button id="addPostBtn" class="add-post-btn" type="button" onclick="addPost()">+ ಹೊಸ ಪೋಸ್ಟ್ ಸೇರಿಸಿ</button>
   <div id="posts-area"></div>
   <div id="photoWrap" class="sheet-photo-wrap">
     <img id="sheet-photo" src="" alt="">
@@ -173,14 +156,14 @@ function openSheet(key){
   document.getElementById('sheet-title').textContent=titles[key]||key;
   document.getElementById('sheet-text').innerHTML=localStorage.getItem('sheet-'+key)||'';
   const sam=key==='samparka',nim=key==='nimma';
-  // document.getElementById('contact-block').style.display=sam?'block':'none';
-// document.getElementById('photoWrap').style.display=(sam||nim)?'none':'block';
-// document.getElementById('typeBtn').style.display=(sam||nim)?'none':'block';
-// document.getElementById('sheet-text').style.display=(sam||nim)?'none':'block';
-// document.getElementById('posts-area').style.display=nim?'block':'none';
-// document.getElementById('addPostBtn').style.display=nim?'block':'none';
-// document.getElementById('addPostBtnBottom').style.display=nim?'block':'none';
-// document.querySelector('.full-save').style.display=sam&&!isEditing()?'none':'block';
+  document.getElementById('contact-block').style.display=sam?'block':'none';
+  document.getElementById('photoWrap').style.display=(sam||nim)?'none':'block';
+  document.getElementById('typeBtn').style.display=(sam||nim)?'none':'block';
+  document.getElementById('sheet-text').style.display=(sam||nim)?'none':'block';
+  document.getElementById('posts-area').style.display=nim?'block':'none';
+  document.getElementById('addPostBtn').style.display=nim&&isEditing()?'block':'none';
+  document.getElementById('addPostBtnBottom').style.display=nim&&isEditing()?'block':'none';
+  document.querySelector('.full-save').style.display=sam&&!isEditing()?'none':'block';
   loadSheetPhoto();
   if(nim)renderPosts();
   if(sam)loadContactSettings();
@@ -207,48 +190,7 @@ function renderPosts(){
     box.append(img,btns,txt,date);area.appendChild(box);
   });
 }
-  function addPost() {
-    if (!isEditing()) return;
-
-    const posts = getPosts();
-
-    posts.push({
-        img: '',
-        text: '',
-        dt: new Date().toISOString()
-    });
-
-    setPosts(posts);
-    renderPosts();
-
-    setTimeout(() => {
-        const all = document.querySelectorAll('.post-box');
-
-        if (all.length) {
-            all[all.length - 1].scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    }, 100);
-
-    saveAll();
-}
-    setPosts(posts);
-    renderPosts();
-
-    const all=document.querySelectorAll('.post-text');
-
-    if(all.length){
-        all[all.length-1].scrollIntoView({
-            behavior:'smooth',
-            block:'center'
-        });
-
-        all[all.length-1].focus();
-    }
-
-    saveAll();
-}
+function addPost(){if(!isEditing())return;const posts=getPosts();posts.push({img:'',text:'',dt:new Date().toISOString()});setPosts(posts);renderPosts();const all=document.querySelectorAll('.post-text');if(all.length)all[all.length-1].focus();}
 function deletePost(i){if(!isEditing())return;const p=getPosts();p.splice(i,1);setPosts(p);renderPosts();}
 function pickPostPhoto(i){if(!isEditing())return;currentPostIdx=i;const input=document.getElementById('postFileInput');input.value='';input.click();}
 document.getElementById('postFileInput').addEventListener('change',e=>{
@@ -314,12 +256,18 @@ function startPassTimer(){
   const tick=()=>{const left=Math.max(0,PASS_LIMIT-Math.floor((Date.now()-passStart)/1000));document.getElementById('idle-info').textContent=fmt(left);};
   tick();passCount=setInterval(tick,1000);passTimer=setTimeout(()=>exitEdit(),PASS_LIMIT*1000);
 }
-
+function enableEditing(){
+  document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';
+  document.querySelectorAll('[data-edit]').forEach(el=>el.contentEditable='true');
+  document.getElementById('sheet-text').contentEditable=currentSheet!=='samparka';
+  if(currentSheet==='nimma'){document.getElementById('addPostBtn').style.display='block';document.getElementById('addPostBtnBottom').style.display='block';renderPosts();}
+  startPassTimer();
+}
 function disableEditing(){
   document.body.classList.remove('editing');document.getElementById('edit-bar').style.display='none';document.getElementById('float-save').style.display='none';
   document.querySelectorAll('[data-edit]').forEach(el=>el.contentEditable='false');
   document.getElementById('sheet-text').contentEditable=false;
-  document.getElementById('addPostBtnBottom').style.display=nim?'block':'none';
+  document.getElementById('addPostBtn').style.display='none';document.getElementById('addPostBtnBottom').style.display='none';
   clearTimeout(passTimer);clearInterval(passCount);
   if(currentSheet==='nimma')renderPosts();
 }
