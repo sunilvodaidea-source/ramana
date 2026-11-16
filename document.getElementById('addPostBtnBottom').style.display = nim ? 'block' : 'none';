@@ -289,7 +289,7 @@ function enableEditing(){
   document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';
   document.querySelectorAll('[data-edit]').forEach(el=>el.contentEditable='true');
   document.getElementById('sheet-text').contentEditable=currentSheet!=='samparka';
-  if(currentSheet==='nimma'){document.getElementById('addPostBtn').style.display='block';document.getElementById('addPostBtnBottom').style.display='block';renderPosts();}
+ document.getElementById('addPostBtn').style.display='none';
   startPassTimer();
 }
 function disableEditing(){
