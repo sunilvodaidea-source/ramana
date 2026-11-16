@@ -161,7 +161,7 @@ function openSheet(key){
   document.getElementById('typeBtn').style.display=(sam||nim)?'none':'block';
   document.getElementById('sheet-text').style.display=(sam||nim)?'none':'block';
   document.getElementById('posts-area').style.display=nim?'block':'none';
-  document.getElementById('addPostBtn').style.display=nim&&isEditing()?'block':'none';
+  document.getElementById('addPostBtn').style.display = nim ? 'block' : 'none';
   document.getElementById('addPostBtnBottom').style.display=nim&&isEditing()?'block':'none';
   document.querySelector('.full-save').style.display=sam&&!isEditing()?'none':'block';
   loadSheetPhoto();
