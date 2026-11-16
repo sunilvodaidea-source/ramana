@@ -215,13 +215,12 @@ function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localSt
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();
   </script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
   const firebaseConfig = {
-    apiKey: "AIzaSyBsHc-KypMVu0ghhy7IhBotZD6dZjqtoq",
+  apiKey: "AIzaSyBsHc-KypMVu0ghhy71hBotZD6dZjqtoq",
     authDomain: "sri-ramana-kannada-website.firebaseapp.com",
     projectId: "sri-ramana-kannada-website",
     storageBucket: "sri-ramana-kannada-website.firebasestorage.app",
@@ -230,7 +229,7 @@ forceNormalView();loadCornerPhoto();
   };
   if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   async function askPassword(){
-    let p = prompt("Admin Password ಹಾಕಿ :");
+    let p = prompt("Admin Password  :");
     if(!p) return;
     try{
       await firebase.auth().signInWithEmailAndPassword("sunilvodaidea@gmail.com", p);
