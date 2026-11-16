@@ -304,7 +304,7 @@ function disableEditing(){
   document.body.classList.remove('editing');document.getElementById('edit-bar').style.display='none';document.getElementById('float-save').style.display='none';
   document.querySelectorAll('[data-edit]').forEach(el=>el.contentEditable='false');
   document.getElementById('sheet-text').contentEditable=false;
-  document.getElementById('addPostBtn').style.display='none';document.getElementById('addPostBtnBottom').style.display='none';
+  document.getElementById('addPostBtnBottom').style.display=nim?'block':'none';
   clearTimeout(passTimer);clearInterval(passCount);
   if(currentSheet==='nimma')renderPosts();
 }
