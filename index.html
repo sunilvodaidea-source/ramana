@@ -190,7 +190,34 @@ function renderPosts(){
     box.append(img,btns,txt,date);area.appendChild(box);
   });
 }
-function addPost(){if(!isEditing())return;const posts=getPosts();posts.push({img:'',text:'',dt:new Date().toISOString()});setPosts(posts);renderPosts();const all=document.querySelectorAll('.post-text');if(all.length)all[all.length-1].focus();}
+  function addPost(){
+    if(!isEditing()) return;
+
+    const posts = getPosts();
+
+    posts.push({
+        img:'',
+        text:'',
+        dt:new Date().toISOString()
+    });
+
+    setPosts(posts);
+    renderPosts();
+
+    setTimeout(() => {
+        const all = document.querySelectorAll('.post-text');
+
+        if(all.length){
+            all[all.length - 1].scrollIntoView({
+                behavior:'smooth'
+            });
+
+            all[all.length - 1].focus();
+        }
+    },100);
+
+    saveAll();
+}
 function deletePost(i){if(!isEditing())return;const p=getPosts();p.splice(i,1);setPosts(p);renderPosts();}
 function pickPostPhoto(i){if(!isEditing())return;currentPostIdx=i;const input=document.getElementById('postFileInput');input.value='';input.click();}
 document.getElementById('postFileInput').addEventListener('change',e=>{
