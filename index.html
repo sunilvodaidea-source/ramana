@@ -168,9 +168,11 @@ function updateGmail(){if(!isEditing())return;let m=document.getElementById('mai
 function copyFullCode(){let was=isEditing();forceNormalView();let code="<!DOCTYPE html>\n"+document.documentElement.outerHTML;navigator.clipboard.writeText(code);document.getElementById('sheet-msg').innerText='Code Copied';if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 function deleteContact(){if(isEditing()){document.getElementById('contact-block').innerHTML='<p style="text-align:center;color:#F5D67A;padding:20px">Contact Box Removed.</p>';saveSheet();}}
 function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();let r=document.createRange();r.selectNodeContents(el);r.collapse(false);let s=window.getSelection();s.removeAllRanges();s.addRange(r);el.scrollIntoView({behavior:'smooth',block:'center'});}
-function getPosts(){try{let a=JSON.parse(localStorage.getItem('nimma-posts')||'[]');if(!Array.isArray(a))return [];return a.map(function(p){return {img:p.img||'',text:p.text||'',dt:p.dt||new Date().toISOString(),likes:p.likes||0,liked:!!p.liked,comments:Array.isArray(p.comments)?p.comments:[]};});}catch(e){return [];}}
-function savePosts(){let posts=[];document.querySelectorAll('.post-box').forEach(function(box){let idx=parseInt(box.dataset.idx||'0');let old=getPosts()[idx]||{};posts.push({img:box.querySelector('.post-img').src||'',text:box.querySelector('.post-text').innerHTML||'',dt:box.dataset.dt||new Date().toISOString(),likes:old.likes||0,liked:!!old.liked,comments:old.comments||[]});});try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}}
-function savePostsDirect(posts){try{localStorage.setItem('nimma-posts',JSON.stringify(posts));}catch(e){}}
+let cachedPosts = [];
+function getPosts(){ return cachedPosts; }
+function savePosts(){...}
+function savePostsDirect(posts){... db.collection...}
+db.collection('site').doc('nimma-posts').onSnapshot..
 function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){posts=[{img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]}];savePostsDirect(posts);}
 area.innerHTML='';posts.forEach(function(p,i){let div=document.createElement('div');div.className='post-box';div.dataset.dt=p.dt;div.dataset.idx=i;
 let commentsHtml=(p.comments||[]).map(function(c){return '<div class="comment-item">'+escapeHtml(c.text)+'<small>'+fmtDateTime(c.dt)+'</small></div>';}).join('');
@@ -196,9 +198,11 @@ function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localSt
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();
 </script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-<script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script
+    <script>
 var firebaseConfig = {
   apiKey: "AIzaSyBsHc-KypMv0uOghhy71hBotZD6dZjqtog",
   authDomain: "sri-ramana-kannada-website.firebaseapp.com",
@@ -208,6 +212,7 @@ var firebaseConfig = {
   appId: "1:200509926521:web:920cbeb9eecd0ba65a78a8"
 };
 firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
 </script>
 </body>
 </html>
