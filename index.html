@@ -189,7 +189,7 @@ let cachedPosts = [];
 function getPosts(){ return cachedPosts; }
 function savePosts(){try{localStorage.setItem('posts',JSON.stringify(posts));}catch(e){}}
 function savePostsDirect(posts){try{if(typeof db!=='undefined' && db){db.collection('posts').doc('main').set({posts:posts});}}catch(e){}}
-db.collection('site').doc('nimma-posts').onSnapshot..
+try{if(typeof db!=='undefined' && db){db.collection('site').doc('nimma-posts').onSnapshot(function(doc){try{if(doc&&doc.exists){var d=doc.data();if(d&&d.posts){posts=d.posts;if(typeof renderPosts==='function')renderPosts();}}}catch(e){}});}}catch(e){}
 function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){posts=[{img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]}];savePostsDirect(posts);}
 area.innerHTML='';posts.forEach(function(p,i){let div=document.createElement('div');div.className='post-box';div.dataset.dt=p.dt;div.dataset.idx=i;
 let commentsHtml=(p.comments||[]).map(function(c){return '<div class="comment-item">'+escapeHtml(c.text)+'<small>'+fmtDateTime(c.dt)+'</small></div>';}).join('');
