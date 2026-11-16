@@ -153,7 +153,7 @@ function navGo(key){if(isEditing()){return;}if(key=='home'){goHome();return;}ope
 function goBack(){if(isEditing())return;closeSheet();}
 function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
 window.addEventListener('load',function(){forceNormalView();loadCornerPhoto();});
- nerPhoto();});
+
 document.addEventListener('input',function(e){resetPassTimerOnActivity();});
 document.addEventListener('paste',function(e){resetPassTimerOnActivity();});
 function loadCornerPhoto(){
