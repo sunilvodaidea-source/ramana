@@ -198,12 +198,10 @@ function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localSt
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();
   </script>
-<script src="...firebase-app-compat.js">
- </script> 
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script
-    <script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script>
 var firebaseConfig = {
   apiKey: "AIzaSyBsHc-KypMv0uOghhy71hBotZD6dZjqtog",
   authDomain: "sri-ramana-kannada-website.firebaseapp.com",
