@@ -152,7 +152,7 @@ function handleLinkClick(e,a){if(isEditing()){e.preventDefault();return false;}r
 function navGo(key){if(isEditing()){return;}if(key=='home'){goHome();return;}openSheet(key);}
 function goBack(){if(isEditing())return;closeSheet();}
 function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
-window.addEventListener('load',function(){forceNormalView();loadCor
+window.addEventListener('load',function(){forceNormalView();loadCornerPhoto();});
  nerPhoto();});
 document.addEventListener('input',function(e){resetPassTimerOnActivity();});
 document.addEventListener('paste',function(e){resetPassTimerOnActivity();});
