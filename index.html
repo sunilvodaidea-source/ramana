@@ -228,8 +228,7 @@ const firebaseConfig = {
   };
   if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   var db = firebase.firestore();
-  async function askPassword(){
-  if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  
   async function askPassword(){
     let p = prompt("Admin Password  :");
     if(!p) return;
