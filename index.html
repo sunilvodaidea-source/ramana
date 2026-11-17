@@ -187,6 +187,7 @@ function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer()
 function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
 function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
 function enableTotalEdit(){document.querySelectorAll('[data-edit]').forEach(e=>{e.contentEditable=true;});document.getElementById('sheet-text').contentEditable=true;showAddBtns();renderPosts();}
+  renderPosts();
 function autoLock(){if(!isEditing())return;saveAllSilent();forceNormalView();stopPassTimer();}
 function updateGmail(){if(!isEditing())return;let m=document.getElementById('mailInput').value.trim();document.getElementById('gmailLink').href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(m)+"&su=Guest%20House%20Booking";}
 function copyFullCode(){let was=isEditing();forceNormalView();let code="<!DOCTYPE html>\n"+document.documentElement.outerHTML;navigator.clipboard.writeText(code);document.getElementById('sheet-msg').innerText='Code Copied';if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
