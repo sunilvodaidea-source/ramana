@@ -81,7 +81,7 @@ body.editing #edit-indicator{display:inline-block!important}
 .add-post-btn-bottom{display:none;width:calc(100% - 40px);margin:10px 20px 10px;background:#FFD700;color:#000;border:none;padding:15px;border-radius:20px;font-weight:bold;font-size:17px;cursor:pointer}
 .del-post-btn{background:#ff4444;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
 body.editing .del-post-btn{display:inline-block}
-@media(max-width:600px){header{flex-direction:column;gap:8px}.hero{display:flex;flex-direction:column;align-items:center;padding-top:20px}.hero .star{order:1}.corner-photo-wrap{position:relative;top:auto;right:auto;order:2;width:150px;height:190px;margin:10px auto 12px}.hero h1{order:3;font-size:34px}.hero p{order:4}.editor h2{font-size:20px;line-height:1.6}.full-title h1{font-size:26px}.comment-row{flex-direction:column}.comment-post-btn{width:100%}}
+@media(max-width:600px){header{flex-direction:column;gap:8px}.hero h1{font-size:34px}.hero{padding-top:20px}.corner-photo-wrap{top:15px;right:8px;width:108px;height:138px}.editor h2{font-size:20px;line-height:1.6}.full-title h1{font-size:26px}.comment-row{flex-direction:column}.comment-post-btn{width:100%}}
 </style>
 </head>
 <body>
@@ -102,40 +102,6 @@ body.editing .del-post-btn{display:inline-block}
 <button id="float-save" type="button" onclick="saveAll()"><span data-edit>save</span></button>
 <input type="file" id="sheetFileInput" accept="image/*" style="display:none">
 <input type="file" id="postFileInput" accept="image/*" style="display:none">
-  <script>
-document.getElementById('cornerFileInput').addEventListener('change', function(){
-  const file = this.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e){
-    const img = document.getElementById('cornerPhoto');
-    img.src = e.target.result;
-    img.style.display = 'block';
-    img.style.width = '100%';
-    img.style.height = '100%';
-    img.style.objectFit = 'cover';
-    img.style.position = 'absolute';
-    img.style.top = '0';
-    img.style.left = '0';
-    img.style.zIndex = '5';
-    document.getElementById('cornerPhotoEmpty').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-});
-</script>
-document.getElementById('cornerFileInput').addEventListener('change', function(){
-  const file = this.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e){
-    const img = document.getElementById('cornerPhoto');
-    img.src = e.target.result;
-    document.getElementById('cornerPhotoEmpty').style.display = 'none';
-    alert('Photo ✅');
-  };
-  reader.readAsDataURL(file);
-});
-</script>
 <div id="full-page">
 <div class="full-top"><b><span data-edit>✦ ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span><span id="edit-indicator"><span data-edit>EDIT ON</span></span></b><div><button class="edit-inside-btn" type="button" onclick="askPassword()"><span data-edit>Edit</span></button> <button class="back-btn" type="button" onclick="goBack()"><span data-edit>Back</span></button></div></div>
 <div class="full-title"><h1 id="sheet-title"><span data-edit>ನಿಮ್ಮ ಪೋಸ್ಟ್</span></h1><p><span data-edit>✦</span></p></div>
