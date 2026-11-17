@@ -91,12 +91,10 @@ body.editing .del-post-btn{display:inline-block}
 <button class="nav-btn" type="button" onclick="navGo('samparka')"><span data-edit>ಸಂಪರ್ಕ</span></button>
 <button class="nav-btn" type="button" onclick="googleLogin()"><span data-edit>🔑</span></button>
 </nav></header>
-
 <div id="home"><div class="hero">
 <div class="corner-photo-wrap" id="cornerWrap" onclick="pickCornerPhoto()"><img id="cornerPhoto" src="" alt=""><div id="cornerPhotoEmpty" class="corner-photo-empty"><span data-edit>Photo</span></div></div>
 <div class="star"><span data-edit>✦</span></div><h1><span data-edit>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span></h1><p><span data-edit>ಅರುಣಾಚಲ ಶಿವ</span></p>
 </div></div>
-
 <input type="file" id="cornerFileInput" accept="image/*" style="display:none">
 <div id="edit-bar"><span data-edit>EDIT</span> <span id="idle-info"><span data-edit>15:00</span></span> <button onclick="saveAll()" style="background:#0A2A5E;color:#fff;padding:8px 20px;border:none;border-radius:15px;font-weight:bold;cursor:pointer"><span data-edit>save</span></button> <button onclick="copyFullCode()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>Copy Code</span></button> <button onclick="exitEdit()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>Done</span></button></div>
 <div class="editor"><p class="pill"><span data-edit>ಸಂಪಾದಕರು</span></p><h2><span data-edit>ವೆಬ್ ಪೇಜ್ ಸಂಪಾದಕರು : ಚಿನ್ವತ (ಸುನಿಲ್)</span></h2><p><span data-edit>Mail ID: sunilvodaidea@gmail.com</span></p></div>
@@ -153,7 +151,6 @@ function navGo(key){if(isEditing()){return;}if(key=='home'){goHome();return;}ope
 function goBack(){if(isEditing())return;closeSheet();}
 function goHome(){if(isEditing())return;closeSheet();document.getElementById('home').scrollIntoView({behavior:'smooth'});}
 window.addEventListener('load',function(){forceNormalView();loadCornerPhoto();});
-
 document.addEventListener('input',function(e){resetPassTimerOnActivity();});
 document.addEventListener('paste',function(e){resetPassTimerOnActivity();});
 function loadCornerPhoto(){
@@ -187,11 +184,26 @@ function deleteContact(){if(isEditing()){document.getElementById('contact-block'
 function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();let r=document.createRange();r.selectNodeContents(el);r.collapse(false);let s=window.getSelection();s.removeAllRanges();s.addRange(r);el.scrollIntoView({behavior:'smooth',block:'center'});}
 let cachedPosts = [];
 function getPosts(){ return cachedPosts; }
-
- function savePosts(){try{let els=document.querySelectorAll('.post-text');let ps=getPosts();els.forEach((el,i)=>{if(ps[i])ps[i].text=el.innerText;});localStorage.setItem('posts',JSON.stringify(getPosts()));savePostsDirect(getPosts());}catch(e){}}
+function savePosts(){try{let els=document.querySelectorAll('.post-text');let ps=getPosts();els.forEach((el,i)=>{if(ps[i])ps[i].text=el.innerText;});localStorage.setItem('posts',JSON.stringify(getPosts()));savePostsDirect(getPosts());}catch(e){}}
 function savePostsDirect(posts){try{if(typeof db!=='undefined' && db){db.collection('site').doc('nimma-posts').set({posts:posts});}}catch(e){}}
-try{if(typeof db!=='undefined' && db){db.collection('site').doc('nimma-posts').onSnapshot(function(doc){try{if(doc&&doc.exists){var d=doc.data();if(d&&d.posts){posts=d.posts;if(typeof renderPosts==='function')renderPosts();}}}catch(e){}});}}catch(e){}
-function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){posts=[{img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]}];savePostsDirect(posts);}
+function loadPostsFromFirebase(){
+  try{
+    if(typeof db!=='undefined' && db){
+      db.collection('site').doc('nimma-posts').onSnapshot(function(doc){
+        try{
+          if(doc && doc.exists){
+            var d = doc.data();
+            if(d && d.posts){
+              cachedPosts = d.posts;
+              renderPosts();
+            }
+          }
+        }catch(e){}
+      });
+    }
+  }catch(e){}
+}
+function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){cachedPosts=[{img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]}];posts=cachedPosts;savePostsDirect(posts);}
 area.innerHTML='';posts.forEach(function(p,i){let div=document.createElement('div');div.className='post-box';div.dataset.dt=p.dt;div.dataset.idx=i;
 let commentsHtml=(p.comments||[]).map(function(c){return '<div class="comment-item">'+escapeHtml(c.text)+'<small>'+fmtDateTime(c.dt)+'</small></div>';}).join('');
 div.innerHTML='<img class="post-img" src="'+(p.img||'')+'" style="display:'+(p.img?'block':'none')+'"><div class="post-btns"><button class="sheet-photo-btn" type="button" onclick="pickPostPhoto('+i+')">Upload Photo</button> <button class="del-post-btn" type="button" onclick="deletePost('+i+')">Delete</button></div><div class="post-text" contenteditable="true">'+(p.text||'')+'</div><div class="post-date">'+fmtDateTime(p.dt)+'</div><div class="like-bar"><button class="like-btn '+(p.liked?'liked':'')+'" type="button" onclick="toggleLike('+i+',this)">'+(p.liked?'❤️ Liked':'🤍 Like')+'</button><span class="like-count">'+(p.likes||0)+' Likes</span><button class="comment-btn" type="button" onclick="focusComment('+i+')">💬 Comment ('+(p.comments||[]).length+')</button></div><div class="comment-area"><div class="comment-list">'+commentsHtml+'</div><div class="comment-row"><input class="comment-input" id="comment-input-'+i+'" placeholder="Write a comment..." onkeydown="if(event.key===\'Enter\'){addComment('+i+')}"><button class="comment-post-btn" type="button" onclick="addComment('+i+')">Post</button></div></div>';
@@ -211,12 +223,11 @@ function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let 
 document.getElementById('sheetFileInput').addEventListener('change',
 function(){if(isEditing()){return;}});
 function exitEdit(){try{editing=false;isEditingMode=false;var e=document.getElementById('editPanel');if(e)e.style.display='none';if(typeof renderPosts==='function')renderPosts();}catch(err){}}
-  function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
+function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();
-   </script>
-
+</script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -231,7 +242,7 @@ const firebaseConfig = {
 };
 if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
-
+loadPostsFromFirebase();
 async function askPassword(targetId){
   let p = prompt("Admin Password :");
   if(!p) return;
@@ -252,12 +263,10 @@ async function askPassword(targetId){
     }
   }
 }
-
 function openBaraha(){ askPassword('nimma-baraha'); }
 function openSamparka(){ askPassword('samparka'); }
-  async function googleLogin(){
+async function googleLogin(){
 try{
- 
     var provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithPopup(provider);
     alert("Login Success ! Edit Open ");
