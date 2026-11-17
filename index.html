@@ -215,19 +215,20 @@ function exitEdit(){try{editing=false;isEditingMode=false;var e=document.getElem
 function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
 document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();
-  </script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script>
-  const firebaseConfig = {
-   apiKey: "AIzaSyBsHc-KypMv0uOghhy71hBotZD6dZjqtog",
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBsHc-KypMv0uOghhy71hBotZD6dZjqtog",
     authDomain: "sri-ramana-kannada-website.firebaseapp.com",
     projectId: "sri-ramana-kannada-website",
     storageBucket: "sri-ramana-kannada-website.firebasestorage.app",
     messagingSenderId: "200509926521",
     appId: "1:200509926521:web:920cbeb9eecd0ba65a78a8"
   };
+  if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+  async function askPassword(){
   if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   async function askPassword(){
     let p = prompt("Admin Password  :");
