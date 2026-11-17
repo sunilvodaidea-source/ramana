@@ -154,11 +154,21 @@ window.addEventListener('load',function(){forceNormalView();loadCornerPhoto();})
 document.addEventListener('input',function(e){resetPassTimerOnActivity();});
 document.addEventListener('paste',function(e){resetPassTimerOnActivity();});
 function loadCornerPhoto(){
-  let p = localStorage.getItem('cornerPhoto');
-  if(p){
-    let img = document.getElementById('cornerPhoto');
-    if(img) img.src = p;
-  }
+ 
+let p = localStorage.getItem('cornerPhoto');
+ 
+let img = document.getElementById('cornerPhoto');
+let empty = document.getElementById('cornerPhotoEmpty');
+ 
+if(p){
+img.src = p;
+img.style.display = 'block';
+empty.style.display = 'none';
+}else{
+img.src = '';
+img.style.display = 'none';
+empty.style.display = 'flex';
+}
 }
 function pickCornerPhoto(){
   document.getElementById('cornerFileInput').click();
