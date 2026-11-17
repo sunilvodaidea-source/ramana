@@ -187,8 +187,8 @@ function deleteContact(){if(isEditing()){document.getElementById('contact-block'
 function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();let r=document.createRange();r.selectNodeContents(el);r.collapse(false);let s=window.getSelection();s.removeAllRanges();s.addRange(r);el.scrollIntoView({behavior:'smooth',block:'center'});}
 let cachedPosts = [];
 function getPosts(){ return cachedPosts; }
-function savePosts(){try{localStorage.setItem('posts',JSON.stringify(posts));}catch(e){}}
-function savePostsDirect(posts){try{if(typeof db!=='undefined' && db){db.collection('posts').doc('main').set({posts:posts});}}catch(e){}}
+unction savePosts(){try{let els=document.querySelectorAll('.post-text');let ps=getPosts();els.forEach((el,i)=>{if(ps[i])ps[i].text=el.innerText;});localStorage.setItem('posts',JSON.stringify(getPosts()));}catch(e){}}
+function savePostsDirect(posts){try{if(typeof db!=='undefined' && db){db.collection('site').doc('nimma-posts').set({posts:posts});}}catch(e){}}
 try{if(typeof db!=='undefined' && db){db.collection('site').doc('nimma-posts').onSnapshot(function(doc){try{if(doc&&doc.exists){var d=doc.data();if(d&&d.posts){posts=d.posts;if(typeof renderPosts==='function')renderPosts();}}}catch(e){}});}}catch(e){}
 function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){posts=[{img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]}];savePostsDirect(posts);}
 area.innerHTML='';posts.forEach(function(p,i){let div=document.createElement('div');div.className='post-box';div.dataset.dt=p.dt;div.dataset.idx=i;
