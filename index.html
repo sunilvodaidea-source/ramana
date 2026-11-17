@@ -280,6 +280,7 @@ try{
     var provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithPopup(provider);
     alert("Login Success ! Edit Open ");
+  document.body.classList.add('editing');
     let bar = document.getElementById('edit-bar');
     if(bar) bar.style.display='block';
     let fs = document.getElementById('float-save');
