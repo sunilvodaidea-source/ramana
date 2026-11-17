@@ -110,6 +110,26 @@ document.getElementById('cornerFileInput').addEventListener('change', function()
   reader.onload = function(e){
     const img = document.getElementById('cornerPhoto');
     img.src = e.target.result;
+    img.style.display = 'block';
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.position = 'absolute';
+    img.style.top = '0';
+    img.style.left = '0';
+    img.style.zIndex = '5';
+    document.getElementById('cornerPhotoEmpty').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+</script>
+document.getElementById('cornerFileInput').addEventListener('change', function(){
+  const file = this.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = document.getElementById('cornerPhoto');
+    img.src = e.target.result;
     document.getElementById('cornerPhotoEmpty').style.display = 'none';
     alert('Photo ✅');
   };
