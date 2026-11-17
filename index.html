@@ -255,13 +255,9 @@ async function askPassword(targetId){
 
 function openBaraha(){ askPassword('nimma-baraha'); }
 function openSamparka(){ askPassword('samparka'); }
-    let fs = document.getElementById('float-save');
-    if(fs) fs.style.display='block'; else alert("float-save ID ");
-    if(typeof enableTotalEdit === 'function'){ enableTotalEdit(); }
-  else { alert("enableTotalEdit Function !"); }
-  }
-  async function googleLogin(){
-  try{
+  async function googleLogin(){ ಕೆಳಗೆ
+try{
+ 
     var provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithPopup(provider);
     alert("Login Success ! Edit Open ");
