@@ -86,7 +86,18 @@ body.editing #edit-indicator{display:inline-block!important}
 body.editing .del-post-btn{display:inline-block}
 .del-post-photo-btn{background:#ff4444;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
 body.editing .del-post-photo-btn{display:inline-block}
-@media(max-width:600px){header{flex-direction:column;gap:8px}.hero h1{font-size:34px}.hero{padding-top:20px}.corner-photo-wrap{top:15px;right:8px;width:108px;height:138px}.editor h2{font-size:20px;line-height:1.6}.full-title h1{font-size:26px}.comment-row{flex-direction:column}.comment-post-btn{width:100%}}
+@media(max-width:600px){
+  header{flex-direction:column;gap:8px}
+  .hero{padding-top:15px}
+  .hero h1{font-size:32px;line-height:1.4;padding:0 10px}
+  .corner-photo-wrap{
+    position:static !important;
+    top:auto;right:auto;
+    margin:0 auto 18px auto;
+    width:135px;height:170px;
+    flex-shrink:0;
+  }
+}ಈಗ ಹೇಗಿರುತ್ತೆ?top:15px;right:8px;width:108px;height:138px}.editor h2{font-size:20px;line-height:1.6}.full-title h1{font-size:26px}.comment-row{flex-direction:column}.comment-post-btn{width:100%}}
 </style>
 </head>
 <body>
