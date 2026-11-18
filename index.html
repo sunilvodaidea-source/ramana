@@ -15,6 +15,8 @@ header b{color:#FFD700;font-size:19px;cursor:pointer}nav{display:flex;flex-wrap:
 .corner-photo-wrap{position:absolute;top:35px;right:20px;width:165px;height:210px;border:2px solid #C9A227;border-radius:10px;overflow:hidden;background:#143A7A;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center}
 .corner-photo-wrap img{width:100%;height:100%;object-fit:cover;display:none;position:absolute;inset:0}
 .corner-photo-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#F5D67A;font-size:15px;text-align:center;padding:10px;line-height:1.5}
+.corner-del{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);background:#ff4444;color:#fff;border:none;padding:6px 12px;border-radius:15px;font-size:12px;font-weight:bold;cursor:pointer;display:none;z-index:20}
+body.editing .corner-del{display:block}
 .editor{padding:28px 20px 30px;text-align:center}
 .pill{color:#F5D67A;border:1.5px solid #F5D67A;display:inline-block;padding:4px 20px;border-radius:50%;font-size:16px;margin:0}
 .editor h2{font-size:27px;margin:18px 0 10px;line-height:1.5}.editor p{font-size:16px;margin:0}
@@ -30,6 +32,7 @@ footer{padding:14px;font-size:15px}
 .sheet-photo-empty{background:#000;height:85px;display:block}
 .sheet-photo-btns{padding:18px 10px;background:#0E2F66;text-align:center}
 .sheet-photo-btn{background:#FFD700;color:#000;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;font-size:16px;cursor:pointer;margin:4px}
+.del-photo-btn{background:#ff4444!important;color:#fff!important}
 .type-hint-btn{display:block;width:calc(100% - 40px);background:#fff;color:#0A2A5E;border:none;padding:14px 20px;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer;margin:15px 20px 0;text-align:center}
 .full-edit{margin:10px 20px 20px;border:1px dashed #C9A227;border-radius:8px;padding:22px;font-size:20px;line-height:1.9;background:#0A2A5E;outline:none;text-align:left;min-height:320px;cursor:text;color:#fff}
 .full-edit *{color:#fff!important;background:transparent!important}
@@ -81,6 +84,8 @@ body.editing #edit-indicator{display:inline-block!important}
 .add-post-btn-bottom{display:none;width:calc(100% - 40px);margin:10px 20px 10px;background:#FFD700;color:#000;border:none;padding:15px;border-radius:20px;font-weight:bold;font-size:17px;cursor:pointer}
 .del-post-btn{background:#ff4444;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
 body.editing .del-post-btn{display:inline-block}
+.del-post-photo-btn{background:#ff4444;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
+body.editing .del-post-photo-btn{display:inline-block}
 @media(max-width:600px){header{flex-direction:column;gap:8px}.hero h1{font-size:34px}.hero{padding-top:20px}.corner-photo-wrap{top:15px;right:8px;width:108px;height:138px}.editor h2{font-size:20px;line-height:1.6}.full-title h1{font-size:26px}.comment-row{flex-direction:column}.comment-post-btn{width:100%}}
 </style>
 </head>
@@ -92,11 +97,11 @@ body.editing .del-post-btn{display:inline-block}
 <button class="nav-btn" type="button" onclick="googleLogin()"><span data-edit>🔑</span></button>
 </nav></header>
 <div id="home"><div class="hero">
-<div class="corner-photo-wrap" id="cornerWrap" onclick="pickCornerPhoto()"><img id="cornerPhoto" src="" alt=""><div id="cornerPhotoEmpty" class="corner-photo-empty"><span data-edit>Photo</span></div></div>
+<div class="corner-photo-wrap" id="cornerWrap" onclick="pickCornerPhoto()"><img id="cornerPhoto" src="" alt=""><div id="cornerPhotoEmpty" class="corner-photo-empty"><span data-edit>Photo</span></div><button class="corner-del" type="button" onclick="event.stopPropagation();deleteCornerPhoto()">Delete Photo</button></div>
 <div class="star"><span data-edit>✦</span></div><h1><span data-edit>ಶ್ರೀ ರಮಣ ಮಹರ್ಷಿ</span></h1><p><span data-edit>ಅರುಣಾಚಲ ಶಿವ</span></p>
 </div></div>
 <input type="file" id="cornerFileInput" accept="image/*" style="display:none">
-<div id="edit-bar"><span data-edit>EDIT</span> <span id="idle-info"><span data-edit>15:00</span></span> <button onclick="saveAll()" style="background:#0A2A5E;color:#fff;padding:8px 20px;border:none;border-radius:15px;font-weight:bold;cursor:pointer"><span data-edit>save</span></button> <button onclick="copyFullCode()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>Copy Code</span></button> <button onclick="exitEdit()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>Done</span></button></div>
+<div id="edit-bar"><span data-edit>EDIT</span> <span id="idle-info"><span data-edit>15:00</span></span> <button onclick="saveAll()" style="background:#0A2A5E;color:#fff;padding:8px 20px;border:none;border-radius:15px;font-weight:bold;cursor:pointer"><span data-edit>save</span></button> <button onclick="exitEdit()" style="background:#fff;padding:8px 15px;border:none;border-radius:15px;cursor:pointer"><span data-edit>Done</span></button></div>
 <div class="editor"><p class="pill"><span data-edit>ಸಂಪಾದಕರು</span></p><h2><span data-edit>ವೆಬ್ ಪೇಜ್ ಸಂಪಾದಕರು : ಚಿನ್ವತ (ಸುನಿಲ್)</span></h2><p><span data-edit>Mail ID: sunilvodaidea@gmail.com</span></p></div>
 <footer><span data-edit>© 2026 ಚಿನ್ವತ ಶ್ರೀ ರಮಣ ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ</span></footer>
 <button id="float-save" type="button" onclick="saveAll()"><span data-edit>save</span></button>
@@ -107,7 +112,7 @@ body.editing .del-post-btn{display:inline-block}
 <div class="full-title"><h1 id="sheet-title"><span data-edit>ನಿಮ್ಮ ಪೋಸ್ಟ್</span></h1><p><span data-edit>✦</span></p></div>
 <button id="addPostBtn" class="add-post-btn" type="button" onclick="addPost()">+ Add Post</button>
 <div id="posts-area"></div>
-<div id="photoWrap" class="sheet-photo-wrap"><img id="sheet-photo" src="" alt="" onclick="pickSheetPhoto()"><div id="sheet-photo-empty" class="sheet-photo-empty"><span data-edit></span></div><div class="sheet-photo-btns"><button class="sheet-photo-btn" type="button" onclick="pickSheetPhoto()"><span data-edit>Upload Photo</span></button></div></div>
+<div id="photoWrap" class="sheet-photo-wrap"><img id="sheet-photo" src="" alt="" onclick="pickSheetPhoto()"><div id="sheet-photo-empty" class="sheet-photo-empty"><span data-edit></span></div><div class="sheet-photo-btns"><button class="sheet-photo-btn" type="button" onclick="pickSheetPhoto()"><span data-edit>Upload Photo</span></button> <button class="sheet-photo-btn del-photo-btn" type="button" onclick="deleteSheetPhoto()"><span data-edit>Delete Photo</span></button></div></div>
 <button id="typeBtn" class="type-hint-btn" type="button" onclick="focusTyping()"><span data-edit>ನಿಮ್ಮ ಬರಹ/ಪೋಸ್ಟ್</span></button>
 <div id="sheet-text" class="full-edit" contenteditable="true"></div>
 <div id="contact-block" style="display:none">
@@ -139,7 +144,7 @@ let currentSheet='';let titles={'nimma':'ನಿಮ್ಮ ಪೋಸ್ಟ್','sa
 let passStart=0;let passTimer=null;let passCount=null;let PASS_LIMIT=900;
 let currentPostIdx=-1;
 function isEditing(){return document.body.classList.contains('editing');}
-function isOpenSheet(key){if(!key)key=currentSheet;return key!=='samparka' && key!=='home';}
+function isOpenSheet(key){if(!key)key=currentSheet;if(!key) return false;return key!=='samparka' && key!=='home';}
 function fmt(s){let m=Math.floor(s/60);let sec=s%60;return m+":"+(sec<10?"0"+sec:sec);}
 function fmtDateTime(d){let dd=new Date(d);let day=String(dd.getDate()).padStart(2,'0');let mo=String(dd.getMonth()+1).padStart(2,'0');let y=dd.getFullYear();let h=dd.getHours();let ap=h>=12?'PM':'AM';let hh=h%12||12;let mm=String(dd.getMinutes()).padStart(2,'0');return day+'-'+mo+'-'+y+', '+hh+':'+mm+' '+ap;}
 function escapeHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -155,64 +160,42 @@ document.addEventListener('input',function(e){resetPassTimerOnActivity();});
 document.addEventListener('paste',function(e){resetPassTimerOnActivity();});
 function loadCornerPhoto(){
   let p = localStorage.getItem('cornerPhoto');
-  if(p){
-    let img = document.getElementById('cornerPhoto');
-    if(img) img.src = p;
-  }
+  let img = document.getElementById('cornerPhoto');
+  let empty = document.getElementById('cornerPhotoEmpty');
+  if(p && img){ img.src = p; img.style.display='block'; if(empty) empty.style.display='none'; }
+  else { if(img) img.style.display='none'; if(empty) empty.style.display='flex'; }
 }
-function pickCornerPhoto(){
-  document.getElementById('cornerFileInput').click();
-}
+function pickCornerPhoto(){ document.getElementById('cornerFileInput').click(); }
+function deleteCornerPhoto(){ if(!isEditing()) return; if(!confirm('Photo Delete ಮಾಡಬೇಕಾ?')) return; try{ localStorage.removeItem('cornerPhoto'); }catch(e){} loadCornerPhoto(); }
 document.getElementById('cornerFileInput').addEventListener('change', function(e){
-  let f = e.target.files[0];
-  if(!f) return;
-  let r = new FileReader();
-  r.onload = function(){
-    localStorage.setItem('cornerPhoto', r.result);
-    loadCornerPhoto();
-  };
-  r.readAsDataURL(f);
+  let f = e.target.files[0]; if(!f) return;
+  let r = new FileReader(); r.onload = function(){ try{ localStorage.setItem('cornerPhoto', r.result); }catch(err){} loadCornerPhoto(); }; r.readAsDataURL(f);
 });
 function startPassTimer(){passStart=Date.now();stopPassTimer();updatePassTimer();passCount=setInterval(updatePassTimer,1000);passTimer=setTimeout(()=>{autoLock();},PASS_LIMIT*1000);}
 function updatePassTimer(){let used=Math.floor((Date.now()-passStart)/1000);let left=PASS_LIMIT-used;if(left<0)left=0;let info=document.getElementById('idle-info');if(info)info.innerText=fmt(left);}
 function stopPassTimer(){clearTimeout(passTimer);clearInterval(passCount);}
+function enableEditMode(){ document.body.classList.add('editing'); let bar=document.getElementById('edit-bar'); if(bar) bar.style.display='block'; let fs=document.getElementById('float-save'); if(fs) fs.style.display='block'; let dc=document.getElementById('delContactBtn'); if(dc && currentSheet==='samparka') dc.style.display='inline-block'; enableTotalEdit(); startPassTimer(); }
 function enableTotalEdit(){document.querySelectorAll('[data-edit]').forEach(e=>{e.contentEditable=true;});document.getElementById('sheet-text').contentEditable=true;showAddBtns();renderPosts();}
 function autoLock(){if(!isEditing())return;saveAllSilent();forceNormalView();stopPassTimer();}
-function updateGmail(){if(!isEditing())return;let m=document.getElementById('mailInput').value.trim();document.getElementById('gmailLink').href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(m)+"&su=Guest%20House%20Booking";}
-function copyFullCode(){let was=isEditing();forceNormalView();let code="<!DOCTYPE html>\n"+document.documentElement.outerHTML;navigator.clipboard.writeText(code);document.getElementById('sheet-msg').innerText='Code Copied';if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
+function updateGmail(){let m=document.getElementById('mailInput').value.trim();document.getElementById('gmailLink').href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(m)+"&su=Guest%20House%20Booking";}
 function deleteContact(){if(isEditing()){document.getElementById('contact-block').innerHTML='<p style="text-align:center;color:#F5D67A;padding:20px">Contact Box Removed.</p>';saveSheet();}}
 function focusTyping(){if(currentSheet==='samparka')return;if(currentSheet==='nimma'){let els=document.querySelectorAll('.post-text');if(els.length)els[els.length-1].focus();return;}let el=document.getElementById('sheet-text');el.focus();let r=document.createRange();r.selectNodeContents(el);r.collapse(false);let s=window.getSelection();s.removeAllRanges();s.addRange(r);el.scrollIntoView({behavior:'smooth',block:'center'});}
 let cachedPosts = [];
 function getPosts(){ return cachedPosts; }
-function savePosts(){try{let els=document.querySelectorAll('.post-text');let ps=getPosts();els.forEach((el,i)=>{if(ps[i])ps[i].text=el.innerText;});localStorage.setItem('posts',JSON.stringify(getPosts()));savePostsDirect(getPosts());}catch(e){}}
+function savePosts(){try{let els=document.querySelectorAll('.post-text');let ps=getPosts();els.forEach((el,i)=>{if(ps[i])ps[i].text=el.innerHTML;});localStorage.setItem('posts',JSON.stringify(getPosts()));savePostsDirect(getPosts());}catch(e){}}
 function savePostsDirect(posts){try{if(typeof db!=='undefined' && db){db.collection('site').doc('nimma-posts').set({posts:posts});}}catch(e){}}
-function loadPostsFromFirebase(){
-  try{
-    if(typeof db!=='undefined' && db){
-      db.collection('site').doc('nimma-posts').onSnapshot(function(doc){
-        try{
-          if(doc && doc.exists){
-            var d = doc.data();
-            if(d && d.posts){
-              cachedPosts = d.posts;
-              renderPosts();
-            }
-          }
-        }catch(e){}
-      });
-    }
-  }catch(e){}
-}
+function loadPostsFromFirebase(){ try{ if(typeof db!=='undefined' && db){ db.collection('site').doc('nimma-posts').onSnapshot(function(doc){ try{ if(doc && doc.exists){ var d = doc.data(); if(d && d.posts){ cachedPosts = d.posts; renderPosts(); } } }catch(e){} }); } }catch(e){} }
 function renderPosts(){let area=document.getElementById('posts-area');if(!area)return;let posts=getPosts();if(currentSheet!=='nimma'){area.innerHTML='';return;}if(posts.length===0){cachedPosts=[{img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]}];posts=cachedPosts;savePostsDirect(posts);}
 area.innerHTML='';posts.forEach(function(p,i){let div=document.createElement('div');div.className='post-box';div.dataset.dt=p.dt;div.dataset.idx=i;
 let commentsHtml=(p.comments||[]).map(function(c){return '<div class="comment-item">'+escapeHtml(c.text)+'<small>'+fmtDateTime(c.dt)+'</small></div>';}).join('');
-div.innerHTML='<img class="post-img" src="'+(p.img||'')+'" style="display:'+(p.img?'block':'none')+'"><div class="post-btns"><button class="sheet-photo-btn" type="button" onclick="pickPostPhoto('+i+')">Upload Photo</button> <button class="del-post-btn" type="button" onclick="deletePost('+i+')">Delete</button></div><div class="post-text" contenteditable="true">'+(p.text||'')+'</div><div class="post-date">'+fmtDateTime(p.dt)+'</div><div class="like-bar"><button class="like-btn '+(p.liked?'liked':'')+'" type="button" onclick="toggleLike('+i+',this)">'+(p.liked?'❤️ Liked':'🤍 Like')+'</button><span class="like-count">'+(p.likes||0)+' Likes</span><button class="comment-btn" type="button" onclick="focusComment('+i+')">💬 Comment ('+(p.comments||[]).length+')</button></div><div class="comment-area"><div class="comment-list">'+commentsHtml+'</div><div class="comment-row"><input class="comment-input" id="comment-input-'+i+'" placeholder="Write a comment..." onkeydown="if(event.key===\'Enter\'){addComment('+i+')}"><button class="comment-post-btn" type="button" onclick="addComment('+i+')">Post</button></div></div>';
+div.innerHTML='<img class="post-img" src="'+(p.img||'')+'" style="display:'+(p.img?'block':'none')+'"><div class="post-btns"><button class="sheet-photo-btn" type="button" onclick="pickPostPhoto('+i+')">Upload Photo</button> <button class="del-post-photo-btn" type="button" onclick="deletePostPhoto('+i+')">Delete Photo</button> <button class="del-post-btn" type="button" onclick="deletePost('+i+')">Delete Post</button></div><div class="post-text" contenteditable="true">'+(p.text||'')+'</div><div class="post-date">'+fmtDateTime(p.dt)+'</div><div class="like-bar"><button class="like-btn '+(p.liked?'liked':'')+'" type="button" onclick="toggleLike('+i+',this)">'+(p.liked?'❤️ Liked':'🤍 Like')+'</button><span class="like-count">'+(p.likes||0)+' Likes</span><button class="comment-btn" type="button" onclick="focusComment('+i+')">💬 Comment ('+(p.comments||[]).length+')</button></div><div class="comment-area"><div class="comment-list">'+commentsHtml+'</div><div class="comment-row"><input class="comment-input" id="comment-input-'+i+'" placeholder="Write a comment..." onkeydown="if(event.key===\'Enter\'){addComment('+i+')}"><button class="comment-post-btn" type="button" onclick="addComment('+i+')">Post</button></div></div>';
 area.appendChild(div);});}
 function toggleLike(i,btn){let posts=getPosts();if(!posts[i])return;if(posts[i].liked){posts[i].liked=false;posts[i].likes=Math.max(0,(posts[i].likes||0)-1);}else{posts[i].liked=true;posts[i].likes=(posts[i].likes||0)+1;}savePostsDirect(posts);renderPosts();}
 function focusComment(i){let inp=document.getElementById('comment-input-'+i);if(inp){inp.focus();inp.scrollIntoView({behavior:'smooth',block:'center'});}}
 function addComment(i){let inp=document.getElementById('comment-input-'+i);if(!inp)return;let txt=inp.value.trim();if(!txt)return;let posts=getPosts();if(!posts[i])return;posts[i].comments.push({text:txt,dt:new Date().toISOString()});savePostsDirect(posts);renderPosts();}
 function addPost(){let posts=getPosts();posts.push({img:'',text:'',dt:new Date().toISOString(),likes:0,liked:false,comments:[]});savePostsDirect(posts);renderPosts();setTimeout(function(){let els=document.querySelectorAll('.post-box');if(els.length)els[els.length-1].scrollIntoView({behavior:'smooth',block:'start'});let txts=document.querySelectorAll('.post-text');if(txts.length)txts[txts.length-1].focus();},100);}
-function deletePost(i){if(!isEditing())return;let posts=getPosts();posts.splice(i,1);savePostsDirect(posts);renderPosts();}
+function deletePost(i){if(!isEditing())return;if(!confirm('ಈ Post Delete ಮಾಡಬೇಕಾ?')) return;let posts=getPosts();posts.splice(i,1);savePostsDirect(posts);renderPosts();}
+function deletePostPhoto(i){if(!isEditing())return;if(!confirm('ಈ Photo Delete ಮಾಡಬೇಕಾ?')) return;let posts=getPosts();if(posts[i]){posts[i].img='';savePostsDirect(posts);renderPosts();}}
 function pickPostPhoto(i){currentPostIdx=i;if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('postFileInput');inp.value='';inp.click();}
 document.getElementById('postFileInput').addEventListener('change',function(e){let f=e.target.files[0];if(!f||currentPostIdx<0)return;let r=new FileReader();r.onload=function(ev){let posts=getPosts();if(posts[currentPostIdx]){posts[currentPostIdx].img=ev.target.result;savePostsDirect(posts);renderPosts();}};r.readAsDataURL(f);e.target.value='';});
 function openSheet(key){currentSheet=key;try{let t=localStorage.getItem('sheet-title-'+key)||titles[key]||key;let st=document.querySelector('#sheet-title [data-edit]');if(st)st.innerText=t;else document.getElementById('sheet-title').innerText=t;}catch(err){document.getElementById('sheet-title').innerText=titles[key]||key;}let s='';try{s=localStorage.getItem('sheet-'+key)||'';}catch(err){s='';}document.getElementById('sheet-text').innerHTML=s;let open=isOpenSheet(key);document.getElementById('sheet-text').contentEditable=open;let titleEl=document.querySelector('#sheet-title [data-edit]');if(titleEl)titleEl.contentEditable=open||isEditing();document.getElementById('sheet-msg').innerHTML='';let isSam=key=='samparka';let isNimma=key=='nimma';document.getElementById('contact-block').style.display=isSam?'block':'none';document.getElementById('photoWrap').style.display=(isSam||isNimma)?'none':'block';document.getElementById('typeBtn').style.display=(isSam||isNimma)?'none':'block';document.getElementById('sheet-text').style.display=(isSam||isNimma)?'none':'block';document.getElementById('posts-area').style.display=isNimma?'block':'none';showAddBtns();if(isNimma)renderPosts();let saveBtn=document.querySelector('.full-save');if(saveBtn)saveBtn.style.display=isSam&&!isEditing()?'none':'block';loadSheetPhoto();let fp=document.getElementById('full-page');fp.classList.add('open');fp.style.display='flex';document.body.style.overflow='hidden';fp.scrollTop=0;}
@@ -220,12 +203,15 @@ function closeSheet(){let fp=document.getElementById('full-page');fp.classList.r
 function saveSheet(){if(currentSheet==='nimma'){savePosts();document.getElementById('sheet-msg').innerHTML='Saved';return;}if(currentSheet==='samparka'&&!isEditing())return;try{localStorage.setItem('sheet-'+currentSheet,document.getElementById('sheet-text').innerHTML);let st=document.querySelector('#sheet-title [data-edit]');localStorage.setItem('sheet-title-'+currentSheet,st?st.innerText:document.getElementById('sheet-title').innerText);if(isEditing())localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}document.getElementById('sheet-msg').innerHTML='Saved';}
 function loadSheetPhoto(){let d='';try{d=localStorage.getItem('sheet-photo-'+currentSheet)||'';}catch(err){d='';}let img=document.getElementById('sheet-photo');let empty=document.getElementById('sheet-photo-empty');if(d){img.src=d;img.style.display='block';empty.style.display='none';}else{img.src='';img.style.display='none';empty.style.display='block';}}
 function pickSheetPhoto(){if(currentSheet==='samparka'&&!isEditing())return;let inp=document.getElementById('sheetFileInput');inp.value='';inp.click();}
-document.getElementById('sheetFileInput').addEventListener('change',
-function(){if(isEditing()){return;}});
-function exitEdit(){try{editing=false;isEditingMode=false;var e=document.getElementById('editPanel');if(e)e.style.display='none';if(typeof renderPosts==='function')renderPosts();}catch(err){}}
-function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
-function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){document.body.classList.add('editing');document.getElementById('edit-bar').style.display='block';document.getElementById('float-save').style.display='block';enableTotalEdit();}}
-document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
+function deleteSheetPhoto(){if(!isEditing()) return;if(!confirm('Photo Delete ಮಾಡಬೇಕಾ?')) return;try{ localStorage.removeItem('sheet-photo-'+currentSheet); }catch(e){} loadSheetPhoto();}
+document.getElementById('sheetFileInput').addEventListener('change', function(e){
+  let f=e.target.files[0]; if(!f) return; if(!currentSheet) return;
+  let r=new FileReader(); r.onload=function(ev){ try{ localStorage.setItem('sheet-photo-'+currentSheet, ev.target.result); }catch(err){} loadSheetPhoto(); }; r.readAsDataURL(f); e.target.value='';
+});
+function exitEdit(){ try{ saveAllSilent(); stopPassTimer(); forceNormalView(); }catch(err){ forceNormalView(); } }
+function saveAllSilent(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);}catch(err){}if(was){enableEditMode();}}
+function saveAll(){let was=isEditing();savePosts();forceNormalView();try{localStorage.setItem('one-sheet-save',document.body.innerHTML);localStorage.setItem('contact-html',document.getElementById('contact-block').innerHTML);}catch(err){}if(was){enableEditMode();}}
+document.addEventListener('click',function(e){if(isEditing()){let b=e.target.closest('button');if(b&&!b.closest('#edit-bar')&&b.id!=='float-save'&&!b.classList.contains('edit-inside-btn')&&!b.classList.contains('back-btn')&&!b.classList.contains('sheet-photo-btn')&&!b.classList.contains('del-photo-btn')&&!b.classList.contains('corner-del')&&!b.classList.contains('del-post-photo-btn')&&!b.classList.contains('add-post-btn')&&!b.classList.contains('add-post-btn-bottom')&&!b.classList.contains('del-post-btn')&&!b.classList.contains('like-btn')&&!b.classList.contains('comment-btn')&&!b.classList.contains('comment-post-btn')){e.stopPropagation();e.preventDefault();}}},true);
 forceNormalView();loadCornerPhoto();
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -244,40 +230,15 @@ if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 loadPostsFromFirebase();
 async function askPassword(targetId){
-  let p = prompt("Admin Password :");
-  if(!p) return;
-  try{
-    await firebase.auth().signInWithEmailAndPassword("sunilvodaidea@gmail.com", p);
-  }catch(e){
-    alert("Login Error: " + e.code + " - " + e.message);
-    return;
-  }
-  alert("Login Success ! ಈಗ Edit Open ");
-  let bar = document.getElementById('edit-bar');
-  if(bar) bar.style.display='block';
-  if(targetId){
-    let el = document.getElementById(targetId);
-    if(el){
-      el.style.display='block';
-      el.scrollIntoView({behavior:'smooth'});
-    }
-  }
+  let p = prompt("Admin Password :"); if(!p) return;
+  try{ await firebase.auth().signInWithEmailAndPassword("sunilvodaidea@gmail.com", p); }catch(e){ alert("Login Error: " + e.code + " - " + e.message); return; }
+  alert("Login Success ! ಈಗ Edit Open "); enableEditMode();
+  if(targetId){ let el = document.getElementById(targetId); if(el){ el.style.display='block'; el.scrollIntoView({behavior:'smooth'}); } }
 }
 function openBaraha(){ askPassword('nimma-baraha'); }
 function openSamparka(){ askPassword('samparka'); }
 async function googleLogin(){
-try{
-    var provider = new firebase.auth.GoogleAuthProvider();
-    await firebase.auth().signInWithPopup(provider);
-    alert("Login Success ! Edit Open ");
-    let bar = document.getElementById('edit-bar');
-    if(bar) bar.style.display='block';
-    let fs = document.getElementById('float-save');
-    if(fs) fs.style.display='block';
-    if(typeof enableTotalEdit === 'function'){ enableTotalEdit(); }
-  } catch(e){
-    alert("Login Error: " + e.message);
-  }
+try{ var provider = new firebase.auth.GoogleAuthProvider(); await firebase.auth().signInWithPopup(provider); alert("Login Success ! Edit Open "); enableEditMode(); } catch(e){ alert("Login Error: " + e.message); }
 }
 </script>
 </html>
